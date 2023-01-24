@@ -6,5 +6,6 @@ proc createDom*(): VNode =
       text "this is also"
     p:
       text "a header"
+      img(src = "cat.png", alt = "cat")
 
 

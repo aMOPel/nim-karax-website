@@ -24,7 +24,7 @@ proc createDom*(): VNode =
   removeFile(htmlFileName)
 
 when isMainModule:
-  var ccRead = open("src/website/contentCollection.nim", fmRead)
+  var ccRead = readFile("src/website/contentCollection.nim")
   var ccAppend = open("src/website/contentCollection.nim", fmAppend)
 
   for _, mdFile in walkDir("./content"):
@@ -35,8 +35,7 @@ import content/{file}
 contents.add Content(name: "{file}", content: {file}.createDom)
 """
     md2karax(dir, file)
-    if ccRead.readAll.find(ccTemplate) < 0:
+    if ccRead.find(ccTemplate) < 0:
       write(ccAppend, ccTemplate)
 
   ccAppend.close()
-  ccRead.close()

@@ -1,11 +1,13 @@
 nimcache/
 nimblecache/
 
-nimbledeps/
+*/nimbledeps/
 
 htmldocs/
-bin/
+*/bin/
 
 Session.vim
-app.html
-app.js
+*/app.html
+*/app.js
+
+node_modules/
