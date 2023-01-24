@@ -15,7 +15,7 @@ nim c --outDir:bin --verbosity:0 --listfullpaths ./transpileMarkdown.nim
 
 # start http server 
 # needs separate shell
-./bin/build && ../nimbledeps/bin/karun -r -w ./website.nim        
+./bin/transpileMarkdown && ./nimbledeps/bin/karun -r -w ./src/website.nim        
 
 # start tailwind watcher
 # needs separate shell
@@ -24,5 +24,5 @@ npx tailwindcss -i ./assets/prestyles.css -o ./assets/styles.css --watch
 # recompilation should work automatically because both build tools use the watch flag (-w/--watch)
 # but if it doesn't work:
 # recompile website manually
-./bin/build && nim js --out:./app.js ./src/website.nim                  
+./bin/transpileMarkdown && nim js --out:./app.js ./src/website.nim                  
 ```
