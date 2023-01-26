@@ -15,7 +15,7 @@ mkShell {
     alias tailwind-start="npx tailwindcss -i ./assets/prestyles.css \
 -o ./assets/styles.css --watch"
 
-    alias karax-recompile="cd $PROJECT_ROOT; ./bin/transpileMarkdown && \
+    alias karax-recompile="./bin/transpileMarkdown && \
 nim js --out:./app.js ./src/website.nim"
 
     alias nim-compile="nim c --outDir:bin --verbosity:0 --listfullpaths \
