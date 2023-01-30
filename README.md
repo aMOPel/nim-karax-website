@@ -15,7 +15,11 @@ nim c --outDir:bin --verbosity:0 --listfullpaths ./transpileMarkdown.nim
 
 # start http server 
 # needs separate shell
-./bin/transpileMarkdown && ./nimbledeps/bin/karun -r -w ./src/website.nim        
+./nimbledeps/bin/karun -r -w ./src/website.nim        
+
+# start markdown watcher
+# needs separate shell
+nim c --outDir:bin --verbosity:0 --listfullpaths ./transpileMarkdown.nim && ./bin/transpileMarkdown
 
 # start tailwind watcher
 # needs separate shell

@@ -6,8 +6,10 @@ nimblecache/
 htmldocs/
 */bin/
 
+hashes.json
 Session.vim
 */app.html
 */app.js
 
 node_modules/
+nim/assets/styles.css
