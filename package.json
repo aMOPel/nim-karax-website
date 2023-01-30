@@ -12,6 +12,7 @@
   "author": "aMOPel",
   "license": "",
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "tailwindcss": "^3.2.4"
   }
 }
