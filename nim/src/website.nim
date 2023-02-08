@@ -1,65 +1,47 @@
 include karax / prelude
 # import ../content/test/test
-import website/contentCollection
+import website/[globals, index, menu, dates]
 import std/[strformat]
 
-var homeContent: VNode
 
-proc menuAction(menuEntry: kstring): proc() =
-  result = proc() =
-    echo "clicked ", menuEntry
-
-proc buildMenu(menu: openArray[tuple[text: string, href: string]]): VNode =
-  result = buildHtml(tdiv(class="""
-    bg-[#fff] max-w-3xl w-full mx-auto sticky top-0 p-3
-  """)):
-    # border-x-red border-x-4
-    nav(class="flex"):
-      for (t, href) in menu:
-        tdiv(class="""
-        mr-3
-        h-9 w-14 min-h-fit min-w-fit
-        bg-white
-        border-b-2 border-b-black rounded-sm 
-        text-lg text-black font-bold
-        relative
-        """):
-          p(class="""
-          invisible text-xl h-0
-          """): 
-            text t
-          a(class="""
-            absolute top-1/2 left-1/2
-            -translate-x-1/2 -translate-y-1/2
-            hover:text-red hover:text-xl
-          """, href = &"#/{href}"):
-            text t
+var
+  kxi: KaraxInstance
 
 proc createDom(route: RouterData): VNode =
   var content: VNode
-  for c in contents:
+  for c in articleContents:
     if route.hashPart == &"#/{c.name}":
       content = c.content()
+      content.insert(c.buildDates, 0)
+      # content.getVNodeById("timestamp").class &= "text-sm italic"
       break
-    elif route.hashPart == &"#/":
-      content = homeContent
+    elif route.hashPart == "#/index":
+      content = kxi.buildIndex
+    elif route.hashPart == "#/experience":
+      content = experienceContent.content()
+    elif route.hashPart.`$` in ["#/", "", "#/home"]:
+      content = homeContent.content()
+      # content.getVNodeById("timestamp").class &= "text-sm italic"
       break
 
   content.class &= """ 
-    prose w-full bg-white mx-auto p-10 max-w-3xl 
-    border-x-red border-x-4
+    prose dark:prose-invert
+    w-full max-w-3xl p-10 mx-auto 
+    bg-grey dark:bg-dmgrey
+    border-x-darkgrey dark:border-x-dmdarkgrey border-x-4
+    border-b-darkgrey dark:border-b-dmdarkgrey border-b-4
+    rounded-b-xl
   """
-  result = buildHtml(tdiv(class="""
-                          """)):
-    buildMenu({"Home": "", "Index": "index"})
+  result = buildHtml(tdiv(
+    class="""
+      bg-white
+      dark:bg-dmwhite
+      min-h-screen
+    """)):
+    kxi.buildMenu({"Home": "home", "General Experience": "experience", "Project Index": "index"})
     if not content.isNil:
       content
 
-var tempI: int
-for i, c in contents.pairs:
-  if c.name == "home":
-    homeContent = c.content()
-    tempI = i
-contents.delete tempI
+when isMainModule:
 
-setRenderer website.createDom
+  kxi = setRenderer website.createDom

@@ -1,11 +1,15 @@
-# [fixedpoint.nim](https://github.com/aMOPel/fixedpoint.nim)
+# fixedpoint.nim
 
-This project was an exercise with the goal of creating a 
-[fixed-point](https://en.wikipedia.org/wiki/Fixed-point_arithmetic) data type.
+<a href="https://github.com/aMOPel/fixedpoint.nim">
+<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+GitHub</a>
+
+This project was an exercise with the goal of creating 
+a [fixed-point](https://en.wikipedia.org/wiki/Fixed-point_arithmetic) data type.
 
 It is implemented in [Nim](https://nim-lang.org/).
 
-This Nim library however doesn't work on a bit-level an
+This Nim library however doesn't work on a bit-level and
 is thus not based on the binary number system but on the decimal number system.
 This means it isn't as fast however it is quite easy to use (and to implement).
 
@@ -26,4 +30,4 @@ echo &"{a.round(2)} + {b.round(2)} = {c.round(2)}"
 ```
 This problem could be circumvented with this library.
 
-After writing it, I have to admit it's not too usefull, though.
+After writing it, I have to admit it's not too useful, though.

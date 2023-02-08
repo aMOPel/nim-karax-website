@@ -1,23 +1,24 @@
 include karax / prelude
 
 proc createDom*(): VNode =
-  result = buildHtml(tdiv):
-    p(id="timestamp"): text "last updated 30-01-2023 22:44"
+  result = buildHtml(article):
     h1:
-      a(href = "https://github.com/aMOPel/godot-xchange-scene"):
-        text "godot-exchange-scene"
+      text "godot-exchange-scene"
+    a(href = "https://github.com/aMOPel/godot-xchange-scene"):
+      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      text "GitHub"
     p:
       text "This is a utility library for the "
       a(href = "https://godotengine.org/"):
         text "Godot Game Engine"
-      text ", written in gdscript."
+      text ", written in GDScript."
     p:
       text """
-The usecase is very specific to the Godot engine, so I'm not going to get into
+The use case is very specific to the Godot engine, so I'm not going to get into
 that."""
     p:
       text """
-Gdscript is the custom scripting language of the Godot engine. It resembles
+GDScript is the custom scripting language of the Godot engine. It resembles
 Python in some aspects, but overall it is very simplistic."""
     p:
       text """

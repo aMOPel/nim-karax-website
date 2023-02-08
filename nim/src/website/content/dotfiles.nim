@@ -1,20 +1,22 @@
 include karax / prelude
 
 proc createDom*(): VNode =
-  result = buildHtml(tdiv):
-    p(id="timestamp"): text "last updated 30-01-2023 22:44"
+  result = buildHtml(article):
     h1:
-      a(href = "https://github.com/aMOPel/dotfiles"):
-        text "dotfiles"
+      text "dotfiles"
+    a(href = "https://github.com/aMOPel/dotfiles"):
+      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      text "GitHub"
+    p:
+      text "Dotfiles contains my configuration files for the development tools."
     p:
       text """
-Dotfiles contains my configuration files for the development tools. It is
-currently built to work well on a ubuntu based linux distro, but it could also
-be adapted to work on other linux distros or windows with WSL."""
+It is currently built to work well on a ubuntu based Linux distro, but it could
+also be adapted to work on other Linux distros or windows with WSL."""
     p:
       text """
-The term dotfiles stems from the convention on linux to put configuration files
-in hidden folders, which start with a """
+The term "dotfiles" stems from the convention on Linux to put configuration
+files in hidden folders, which start with a """
       code:
         text "."
       text "."
@@ -26,13 +28,13 @@ of the setup process is scripted."""
       text "The mentionable tools that are configured are"
     ul:
       li:
-        text "neovim (terminal based text editor with similar extensibility to VSCode)"
+        text "NeoVim (terminal based text editor with similar extensibility to VSCode)"
       li:
-        text "ranger (terminal UI file explorer)"
+        text "Ranger (terminal UI file explorer)"
       li:
-        text "zsh (shell, slightly fancier than bash)"
+        text "ZSH (shell, slightly fancier than bash)"
       li:
-        text "kitty (modern terminal emulator)"
+        text "Kitty (modern terminal emulator)"
     p:
       text "The benefits of choosing such a terminal heavy set of tools are:"
     ul:

@@ -1,12 +1,20 @@
-# Experience 
+# Experience
+
+<a href="https://github.com/aMOPel">
+<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+GitHub</a>
+
+
+My experience gathered in programming related fields so far.
+
 ## Programming languages 
  
 ### Java 
-In the first semesters of my studies I had to use some Java for various excercises. 
+In the first semesters of my studies I had to use some Java for various exercises. 
 I haven't really used it since, so my Java knowledge is extremely rusty. 
  
 ### SQL 
-I took various database courses, some of which included pratical usage of PostgreSQL. 
+I took various database courses, some of which included practical usage of PostgreSQL. 
 I haven't used SQL a lot since then. 
 It only came to use, in my [tasketeer.nim](#/tasketeer_nim) project. 
 In there I used SQLite and an ORM library. 
@@ -28,12 +36,14 @@ types, pointers, references, passing by value/reference,
 compile time vs runtime, stack vs heap, and some other 
 software engineering concepts, that I hadn't really understood to that point. 
  
-### Javascript/Typescript (and HTML+CSS) 
-I had no real contact with Javascript throughout my studies, 
+### JavaScript/TypeScript (and HTML+CSS) 
+I had no real contact with JavaScript throughout my studies, 
 but I had to get into it, when I helped with a Vue project. 
-It wasn't very had, due to my knowledge of the previously mentioned languages. 
-Ofcourse I also had to refresh my knowledge of HTML and CSS, which I was already 
-somewhat familiar with. 
+It wasn't very hard, due to my knowledge of the previously mentioned languages. 
+Of course, I also had to refresh my knowledge of HTML and CSS, which I was already 
+somewhat familiar with.
+Although I am familiar with most concepts surrounding web development,
+I am still missing many of the details necessary.
  
 ### Nim 
 About two years ago I discovered a less known language called [Nim](https://nim-lang.org/), 

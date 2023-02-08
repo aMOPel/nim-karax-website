@@ -1,13 +1,14 @@
 include karax / prelude
 
 proc createDom*(): VNode =
-  result = buildHtml(tdiv):
-    p(id="timestamp"): text "last updated 30-01-2023 22:44"
+  result = buildHtml(article):
     h1:
-      a(href = "https://github.com/aMOPel/fixedpoint.nim"):
-        text "fixedpoint.nim"
+      text "fixedpoint.nim"
+    a(href = "https://github.com/aMOPel/fixedpoint.nim"):
+      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      text "GitHub"
     p:
-      text "This project was an exercise with the goal of creating a"
+      text "This project was an exercise with the goal of creating a "
       a(href = "https://en.wikipedia.org/wiki/Fixed-point_arithmetic"):
         text "fixed-point"
       text " data type."
@@ -18,9 +19,9 @@ proc createDom*(): VNode =
       text "."
     p:
       text """
-This Nim library however doesn't work on a bit-level an is thus not based on the
-binary number system but on the decimal number system. This means it isn't as
-fast however it is quite easy to use (and to implement)."""
+This Nim library however doesn't work on a bit-level and is thus not based on
+the binary number system but on the decimal number system. This means it isn't
+as fast however it is quite easy to use (and to implement)."""
     p:
       text """
 The only real application for this library would be if you work with numbers
@@ -42,6 +43,6 @@ echo &"{a.round(2)} + {b.round(2)} = {c.round(2)}"
     p:
       text "This problem could be circumvented with this library."
     p:
-      text "After writing it, I have to admit it's not too usefull, though."
+      text "After writing it, I have to admit it's not too useful, though."
 
 

@@ -1,21 +1,24 @@
 include karax / prelude
 
 proc createDom*(): VNode =
-  result = buildHtml(tdiv):
-    p(id="timestamp"): text "last updated 30-01-2023 22:44"
+  result = buildHtml(article):
     h1:
-      a(href = "https://github.com/aMOPel/fomu-trng"):
-        text "fomu-trng"
+      text "fomu-trng"
+    a(href = "https://github.com/aMOPel/fomu-trng"):
+      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      text "GitHub"
     p:
-      text "This project is the result of my bachelor thesis. It is about connecting a "
+      text "This project is the result of my bachelor thesis."
+    p:
+      text "It is about connecting a "
       a(href = "https://en.wikipedia.org/wiki/Hardware_random_number_generator"):
         text "TRNG"
       text """
-(true random number generator) via USB to a PC and making the random data
+ (true random number generator) via USB to a PC and making the random data
 available in software. The TRNG was put on an """
       a(href = "https://en.wikipedia.org/wiki/Field-programmable_gate_array"):
         text "FPGA"
-      text "Device, namely the "
+      text " Device, namely the "
       a(href = "https://tomu.im/fomu.html"):
         text "Fomu"
       text "."
@@ -33,7 +36,7 @@ available in software. The TRNG was put on an """
     p:
       text """
 That means the code I had to write on a hardware level was only about glueing
-the intefaces of the technologies together. This was still quite involved for
+the interfaces of the technologies together. This was still quite involved for
 me, since I never worked with hardware technologies like this before."""
     p:
       text """

@@ -1,12 +1,16 @@
-# [godot-exchange-scene](https://github.com/aMOPel/godot-xchange-scene)
+# godot-exchange-scene
+
+<a href="https://github.com/aMOPel/godot-xchange-scene">
+<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+GitHub</a>
 
 This is a utility library for the [Godot Game Engine](https://godotengine.org/)
-, written in gdscript.
+, written in GDScript.
 
-The usecase is very specific to the Godot engine,
+The use case is very specific to the Godot engine,
 so I'm not going to get into that.
 
-Gdscript is the custom scripting language of the Godot engine.
+GDScript is the custom scripting language of the Godot engine.
 It resembles Python in some aspects, but overall it is very simplistic.
 
 This project was probably my first real experience of writing a slightly 

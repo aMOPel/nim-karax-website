@@ -1,10 +1,14 @@
 include karax / prelude
 
 proc createDom*(): VNode =
-  result = buildHtml(tdiv):
-    p(id="timestamp"): text "last updated 30-01-2023 22:44"
+  result = buildHtml(article):
     h1:
       text "Experience"
+    a(href = "https://github.com/aMOPel"):
+      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      text "GitHub"
+    p:
+      text "My experience gathered in programming related fields so far."
     h2:
       text "Programming languages"
     h3:
@@ -12,13 +16,13 @@ proc createDom*(): VNode =
     p:
       text """
 In the first semesters of my studies I had to use some Java for various
-excercises. I haven't really used it since, so my Java knowledge is extremely
+exercises. I haven't really used it since, so my Java knowledge is extremely
 rusty."""
     h3:
       text "SQL"
     p:
       text """
-I took various database courses, some of which included pratical usage of
+I took various database courses, some of which included practical usage of
 PostgreSQL. I haven't used SQL a lot since then. It only came to use, in my """
       a(href = "#/tasketeer_nim"):
         text "tasketeer.nim"
@@ -50,13 +54,15 @@ to be not as hard as I thought. A while later I worked through """
 value/reference, compile time vs runtime, stack vs heap, and some other software
 engineering concepts, that I hadn't really understood to that point."""
     h3:
-      text "Javascript/Typescript (and HTML+CSS)"
+      text "JavaScript/TypeScript (and HTML+CSS)"
     p:
       text """
-I had no real contact with Javascript throughout my studies, but I had to get
-into it, when I helped with a Vue project. It wasn't very had, due to my
-knowledge of the previously mentioned languages. Ofcourse I also had to refresh
-my knowledge of HTML and CSS, which I was already somewhat familiar with."""
+I had no real contact with JavaScript throughout my studies, but I had to get
+into it, when I helped with a Vue project. It wasn't very hard, due to my
+knowledge of the previously mentioned languages. Of course, I also had to
+refresh my knowledge of HTML and CSS, which I was already somewhat familiar
+with. Although I am familiar with most concepts surrounding web development, I
+am still missing many of the details necessary."""
     h3:
       text "Nim"
     p:
