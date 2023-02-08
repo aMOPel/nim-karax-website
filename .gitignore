@@ -13,3 +13,4 @@ Session.vim
 
 node_modules/
 nim/assets/styles.css
+dist/

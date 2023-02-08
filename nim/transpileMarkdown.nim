@@ -1,6 +1,5 @@
 import std/[strformat, osproc, os, strutils, times, re]
 import nosey
-import print
 
 const dateFormat = "dd-MM-yyyy HH:mm"
 
@@ -85,8 +84,57 @@ contents\.add Content\(
   ccFileName.writeFile(ccRead.replace(re ccTemplatePattern, ""))
 
 when isMainModule:
-  const
+
+  # parse cmdline -w and/or -j=[file]
+  import std/[parseopt, json]
+  type Mode = enum mWatch, mOnce
+  var
     sourceDir = "content"
     targetDir = "src/website/content"
     jsonFile = "../contentHashes.json"
-  watch(sourceDir, targetDir, 5000, mdToKarax, rmKarax, jsonFile)
+    mode = mOnce
+  var p = commandLineParams().initOptParser(shortNoVal={'w'})
+  while true:
+    p.next()
+    case p.kind:
+    of cmdEnd: break
+    of cmdShortOption, cmdLongOption:
+      case p.key:
+      of "j":
+        if p.val != "":
+          jsonFile = p.val
+          echo "using json file " & p.val
+      of "w":
+        mode = mWatch
+        echo "going into watch mode"
+      of "s":
+        if p.val != "":
+          sourceDir = p.val
+          echo "using source directory " & p.val
+      of "t":
+        if p.val != "":
+          targetDir = p.val
+          echo "using target directory " & p.val
+      of ["h", "help"]:
+        echo """
+    -s=[sourceDir]    default: "content"
+    -t=[targetDir]    default: "src/website/content"
+    -j=[jsonFile]     default: "../contentHashes.json"
+    -w                run watcher
+    """
+        quit()
+    of cmdArgument:
+      echo "doesn't accept arguments"
+
+  # running
+  case mode:
+  of mWatch:
+    watch(sourceDir, targetDir, 5000, mdToKarax, rmKarax, jsonFile)
+  of mOnce:
+    var 
+      ss: DirState
+      ncd: NewChangedDeleted
+    ss = readFile(jsonFile).parseJson.to(ss.type) 
+    ncd = ss.updateDirState
+    applyDirState(ss, targetDir, ncd, mdToKarax, rmKarax)
+    writeFile(jsonFile.addFileExt("json"), $ %*ss)
