@@ -6,7 +6,7 @@ proc createDom*(): VNode =
       text "Experience"
     a(href = "https://github.com/aMOPel"):
       img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
-      text "GitHub"
+      text "GitHub Profile"
     p:
       text "My experience gathered in programming related fields so far."
     h2:
@@ -75,6 +75,12 @@ most of my more recent projects use it in some capacity. Like when I was
 learning C++, learning Nim in depth gave me some deeper insights into software
 engineering concepts like meta programming and garbage collection."""
     h2:
+      text "Frameworks"
+    p:
+      text """
+Other than Godot and (a little) Vue I haven't really explored bigger Frameworks,
+since I didn't really do projects of bigger scale yet."""
+    h2:
       text "Technologies"
     h3:
       text "Linux Terminal"
@@ -88,8 +94,9 @@ experience I am well versed with the user level aspects."""
     p:
       text """
 Git has been my VCS of choice for a long time now and as you can see on my
-GitHub Profile I am also familiar with the GitHub additions to the Git workflow,
-namely working with Issues and PRs. I didn't use GitHub actions yet, though."""
+GitHub profile I am also familiar with the GitHub additions to the Git workflow,
+namely working with Issues and PRs. I didn't use GitHub actions yet, however
+build scripts I use build scripts for building and more regularly."""
     h3:
       text "Docker"
     p:
@@ -97,10 +104,41 @@ namely working with Issues and PRs. I didn't use GitHub actions yet, though."""
 During my studies I also had to use a few docker containers, so I at least have
 a superficial understanding of its usage."""
     h2:
-      text "Frameworks"
+      text "Tooling"
     p:
       text """
-Other than Godot and (a little) Vue I haven't really explored bigger Frameworks,
-since I didn't really do projects of bigger scale yet."""
+Since I spent a lot of time learning and configuring Vim/NeoVim and other tools
+in the terminal, I have a decent understanding of the development tool domain."""
+    p:
+      text "Among others, I came in contact with:"
+    ul:
+      li:
+        text "LSP Servers, which are usually responsible for"
+        ul:
+          li:
+            text "Linting and Code Actions"
+          li:
+            text "Providing completion items"
+          li:
+            text "Formatting (some)"
+          li:
+            text "Intelligent Code Navigation like \"go to definition\" / \"go to references\""
+      li:
+        text """
+Syntax Highlighting (In NeoVim mostly done by Tree-Sitter, but also by RegEx
+Grammars)"""
+      li:
+        text "Debug Adapters (mostly DAP)"
+      li:
+        text "Snippet Engines"
+      li:
+        text """
+Grep-likes, RegEx/Globbing and fuzzy finders for efficient searching and
+replacing"""
+      li:
+        text "Scripting for building/deploying (in "
+        code:
+          text "sh"
+        text " or some programming language)"
 
 
