@@ -28,9 +28,9 @@ proc createDom(route: RouterData): VNode =
     prose dark:prose-invert
     w-full max-w-3xl p-10 mx-auto 
     bg-grey dark:bg-dmgrey
-    border-x-darkgrey dark:border-x-dmdarkgrey border-x-4
+    md:border-x-darkgrey md:dark:border-x-dmdarkgrey md:border-x-4
     border-b-darkgrey dark:border-b-dmdarkgrey border-b-4
-    rounded-b-xl
+    md:rounded-b-xl
   """
   result = buildHtml(tdiv(
     class="""
