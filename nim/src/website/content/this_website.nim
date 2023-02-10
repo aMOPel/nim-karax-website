@@ -4,7 +4,7 @@ proc createDom*(): VNode =
   result = buildHtml(article):
     h1:
       text "This Website"
-    a(href = "https://github.com/aMOPel/nim-karax-website"):
+    a(href = "https://github.com/aMOPel/nim-karax-website/tree/amopels_content"):
       img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
       text "GitHub"
     p:
@@ -108,5 +108,19 @@ imported and integrated into the website as desired."""
       text """
 For example, this website is using the file names of the Markdown files as
 routes for which the content will be the content of the Markdown file."""
+    hr()
+    p:
+      text """
+From a design perspective relevant might be the support for Dark Mode/Light Mode
+and some basic responsiveness, as there is a special Mobile Menu (which you have
+to refresh the page for, if you're using the inspector on desktop)."""
+    p:
+      text """
+The responsiveness of the content column is done with Tailwind's media queries,
+the mobile menu is done via the DOM Interface in Nim. The switch happens at a
+cutoff of 640px """
+      code:
+        text "clientWidth"
+      text "."
 
 
