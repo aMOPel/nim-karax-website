@@ -9,7 +9,7 @@ type
   MenuItem* = tuple[text: string, href: string]
 const
   dateFormat* = "dd-MM-yyyy HH:mm"
-  mobileMenuWidthThreshold* = 500
+  mobileMenuWidthThreshold* = 640
 var
   homeContent*: Content
   experienceContent*: Content
