@@ -39,7 +39,8 @@ proc buildMobileMenuContent(): VNode =
             """, href = &"#/{href}", onclick=onClickRedrawAndCloseMenu):
               tdiv(class="""
                 w-full
-                hover:border-2 hover:border-red dark:hover:border-dmred
+                border-2 border-grey dark:border-dmgrey
+                hover:border-red dark:hover:border-dmred
                 hover:shadow-md hover:shadow-black
                 p-3
               """):

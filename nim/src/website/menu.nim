@@ -32,7 +32,8 @@ proc buildMenu*(
             """):
               a(class="""
                 p-2
-                hover:border-2 hover:border-red dark:hover:border-dmred
+                border-2 border-grey dark:border-dmgrey
+                hover:border-red dark:hover:border-dmred
                 hover:shadow-black hover:shadow-md
               """, href = &"#/{href}", onclick=kxi.onClickRedraw):
                 text t

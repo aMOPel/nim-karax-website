@@ -18,7 +18,8 @@ proc buildIndex*(kxi: KaraxInstance): VNode =
                 no-underline dark:hover:text-dmblack hover:text-black
               """):
               tdiv(class="""
-                hover:border-2 hover:border-red dark:hover:border-dmred
+                border-2 border-grey dark:border-dmgrey
+                hover:border-red dark:hover:border-dmred
                 hover:shadow-md hover:shadow-black
                 p-3 my-0 
               """):
