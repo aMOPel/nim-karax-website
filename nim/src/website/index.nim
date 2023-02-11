@@ -8,12 +8,12 @@ proc buildIndex*(kxi: KaraxInstance): VNode =
          list-none m-0 p-0 
          divide-black dark:divide-dmblack divide-y divide-solid
        """):
-      for c in articleContents:
+      for name, c in contents["projects"]:
         li(class="m-0 p-0 py-2"):
           tdiv(class="""
             m-0 p-0
           """):
-            a(href= &"#/{c.name}", onclick=kxi.onClickRedraw,
+            a(href= &"#/{name}", onclick=kxi.onClickRedraw,
               class="""
                 no-underline dark:hover:text-dmblack hover:text-black
               """):

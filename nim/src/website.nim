@@ -3,26 +3,25 @@ include karax / prelude
 import website/[globals, index, menu, dates]
 import std/[strformat]
 
+# TODO: find a solution for meta data in head html and karun not allowing for that
 
 var
   kxi: KaraxInstance
 
 proc createDom(route: RouterData): VNode =
   var content: VNode
-  for c in articleContents:
-    if route.hashPart == &"#/{c.name}":
-      content = c.content()
-      content.insert(c.buildDates, 0)
-      # content.getVNodeById("timestamp").class &= "text-sm italic"
-      break
-    elif route.hashPart == "#/index":
-      content = kxi.buildIndex
-    elif route.hashPart == "#/experience":
-      content = experienceContent.content()
-    elif route.hashPart.`$` in ["#/", "", "#/home"]:
-      content = homeContent.content()
-      # content.getVNodeById("timestamp").class &= "text-sm italic"
-      break
+  if route.hashPart == "#/index":
+    content = kxi.buildIndex
+  elif route.hashPart == "#/experience":
+    content = contents["special"]["experience"].content()
+  elif route.hashPart.`$` in ["#/", "", "#/home"]:
+    content = contents["special"]["home"].content()
+  else:
+    for name, c in contents["projects"]:
+      if route.hashPart == &"#/{name}":
+        content = c.content()
+        content.insert(c.buildDates, 0)
+        break
 
   content.class &= """ 
     prose dark:prose-invert

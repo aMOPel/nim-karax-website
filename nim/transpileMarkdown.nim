@@ -3,14 +3,38 @@ import nosey
 
 const dateFormat = "dd-MM-yyyy HH:mm"
 
+proc splitIndex(fileName: string):
+  tuple[index: int, nameWithoutIndex: string] =
+  try:
+    let
+      s = fileName.split('_', 1)
+    result = (index: s[0].parseInt, nameWithoutIndex: s[1])
+  except ValueError:
+    result = (index: 0, nameWithoutIndex: fileName)
+
+proc findCommonSubDirs(sourceDir, targetDir: string): string =
+  let 
+    t = targetDir.split('/')
+    s = sourceDir.split('/')
+  var tIndex = -1
+  for ssub in s:
+    tIndex = t.find(ssub)
+    if tIndex != -1: break
+  if tIndex != -1:
+    result = t[tIndex+1..^1].join("/")
+
 proc mdToKarax(sourceFilePath, targetDir: string) =
   echo &"Updating {targetDir/sourceFilePath.splitPath.tail}"
   let 
-    sourceFileName = sourceFilePath.splitFile.name
     mdFileName = sourceFilePath
+    (sourceDir, name, _) = sourceFilePath.splitFile
+    subDir = findCommonSubDirs(sourceDir, targetDir)
+    (index, sourceFileName) = name.splitIndex
     htmlFileName = sourceFilePath.changeFileExt "html"
     nimFileName = targetDir/sourceFileName.changeFileExt("nim")
+    moduleName =  &"{subDir}_{sourceFileName}"
     currentDate = now().format dateFormat
+  createDir targetDir
   discard execCmd(&"./nimbledeps/bin/markdown < {mdFileName} > {htmlFileName}")
   discard execCmd(&"./nimbledeps/bin/html2karax {htmlFileName} --out:{nimFileName}")
   var nimFile = readFile(nimFileName)
@@ -28,22 +52,21 @@ proc createDom*(): VNode =
   removeFile(htmlFileName)
 
   const ccFileName = "src/website/contentCollection.nim"
+
   var
     ccRead = ccFileName.readFile
-    ccTemplatePattern = &"""
-import content\/{sourceFileName}
-contents\.add Content\(
+    ccTemplateBase = &"""
+import content/{subDir/sourceFileName} as {moduleName}
+contents.add Content(
+  index: {index},
+  subDir: "{subDir}",
   name: "{sourceFileName}",
-  content: {sourceFileName}\.createDom,
+  content: {moduleName}.createDom,
+"""
+    ccTemplatePattern = ccTemplateBase.escapeRe & """
   creationTime: "(.*)",
   lastWriteTime: ".*"
 \)
-"""
-    ccTemplateBase = &"""
-import content/{sourceFileName}
-contents.add Content(
-  name: "{sourceFileName}",
-  content: {sourceFileName}.createDom,
 """
     ccTemplateNew = ccTemplateBase & &"""
   creationTime: "{currentDate}",
@@ -65,18 +88,32 @@ contents.add Content(
 proc rmKarax(sourceFilePath, targetDir: string) =
   echo &"Removing {targetDir/sourceFilePath.splitPath.tail}"
   let 
-    sourceFileName = sourceFilePath.splitFile.name
+    (sourceDir, name, _) = sourceFilePath.splitFile
+    subDir = findCommonSubDirs(sourceDir, targetDir)
+    (index, sourceFileName) = name.splitIndex
     nimFileName = targetDir/sourceFileName.changeFileExt("nim")
+    moduleName =  &"{subDir}_{sourceFileName}"
   nimFileName.removeFile
+
+  # remove dir if now empty
+  var fileCount = 0
+  for _, _ in targetDir.walkDir: fileCount.inc
+  if fileCount == 0:
+    echo &"Removing {targetDir} since it's empty now"
+    targetDir.removeDir
 
   const ccFileName = "src/website/contentCollection.nim"
   var
     ccRead = ccFileName.readFile
-    ccTemplatePattern = &"""
-import content\/{sourceFileName}
-contents\.add Content\(
+    ccTemplateBase = &"""
+import content/{subDir/sourceFileName} as {moduleName}
+contents.add Content(
+  index: {index},
+  subDir: "{subDir}",
   name: "{sourceFileName}",
-  content: {sourceFileName}\.createDom,
+  content: {moduleName}.createDom,
+"""
+    ccTemplatePattern = ccTemplateBase.escapeRe & """
   creationTime: ".*",
   lastWriteTime: ".*"
 \)
@@ -129,12 +166,28 @@ when isMainModule:
   # running
   case mode:
   of mWatch:
-    watch(sourceDir, targetDir, 5000, mdToKarax, rmKarax, jsonFile)
+    watch(
+      sourceDir,
+      targetDir,
+      5000,
+      mdToKarax,
+      rmKarax,
+      jsonFile,
+      doNothingWhenNoJson=false
+    )
   of mOnce:
     var 
       ss: DirState
       ncd: NewChangedDeleted
-    ss = readFile(jsonFile).parseJson.to(ss.type) 
+    try:
+      ss = readFile(jsonFile).parseJson.to(ss.type) 
+    except JsonParsingError, IOError:
+      let e = getCurrentException()
+      echo &"{e.name}: {e.msg}"
+      echo "using current state of " & sourceDir & 
+        " and creating " & jsonFile & " later"
+      echo ""
+      ss = DirState(dirName: sourceDir)
     ncd = ss.updateDirState
     applyDirState(ss, targetDir, ncd, mdToKarax, rmKarax)
     writeFile(jsonFile.addFileExt("json"), $ %*ss)
