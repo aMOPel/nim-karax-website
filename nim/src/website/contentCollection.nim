@@ -10,87 +10,112 @@ type Content* = object
 
 var contents*: seq[Content]
 
-import content/godot_grid
+
+import content/projects/tasketeer_nim as projects_tasketeer_nim
 contents.add Content(
-  name: "godot_grid",
-  content: godot_grid.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "06-02-2023 15:32"
-)
-import content/godot_exchange_scene
-contents.add Content(
-  name: "godot_exchange_scene",
-  content: godot_exchange_scene.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "06-02-2023 15:32"
-)
-import content/dotfiles
-contents.add Content(
-  name: "dotfiles",
-  content: dotfiles.createDom,
-  creationTime: "07-02-2023 16:10",
-  lastWriteTime: "06-02-2023 15:29"
-)
-import content/fixedpoint_nim
-contents.add Content(
-  name: "fixedpoint_nim",
-  content: fixedpoint_nim.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "08-02-2023 16:48"
-)
-import content/home
-contents.add Content(
-  name: "home",
-  content: home.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "08-02-2023 16:59"
-)
-import content/fomu_trng
-contents.add Content(
-  name: "fomu_trng",
-  content: fomu_trng.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "06-02-2023 15:31"
-)
-import content/tasketeer_nim
-contents.add Content(
+  index: 8,
+  subDir: "projects",
   name: "tasketeer_nim",
-  content: tasketeer_nim.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "06-02-2023 15:34"
+  content: projects_tasketeer_nim.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
 )
-import content/experience
+import content/special/experience as special_experience
 contents.add Content(
+  index: 0,
+  subDir: "special",
   name: "experience",
-  content: experience.createDom,
-  creationTime: "07-02-2023 22:17",
-  lastWriteTime: "09-02-2023 17:51"
+  content: special_experience.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
 )
-import content/tree_sitter_nim
+import content/projects/godot_grid as projects_godot_grid
 contents.add Content(
-  name: "tree_sitter_nim",
-  content: tree_sitter_nim.createDom,
-  creationTime: "07-02-2023 16:02",
-  lastWriteTime: "06-02-2023 15:34"
+  index: 2,
+  subDir: "projects",
+  name: "godot_grid",
+  content: projects_godot_grid.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
 )
-import content/nosey_nim
+import content/special/home as special_home
 contents.add Content(
-  name: "nosey_nim",
-  content: nosey_nim.createDom,
-  creationTime: "07-02-2023 22:37",
-  lastWriteTime: "07-02-2023 22:58"
+  index: 0,
+  subDir: "special",
+  name: "home",
+  content: special_home.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
 )
-import content/this_website
+import content/projects/godot_tetris_clone as projects_godot_tetris_clone
 contents.add Content(
-  name: "this_website",
-  content: this_website.createDom,
-  creationTime: "07-02-2023 22:56",
-  lastWriteTime: "10-02-2023 22:55"
-)
-import content/godot_tetris_clone
-contents.add Content(
+  index: 3,
+  subDir: "projects",
   name: "godot_tetris_clone",
-  content: godot_tetris_clone.createDom,
-  creationTime: "09-02-2023 19:46",
-  lastWriteTime: "09-02-2023 23:42"
+  content: projects_godot_tetris_clone.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/dotfiles as projects_dotfiles
+contents.add Content(
+  index: 4,
+  subDir: "projects",
+  name: "dotfiles",
+  content: projects_dotfiles.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/fixedpoint_nim as projects_fixedpoint_nim
+contents.add Content(
+  index: 7,
+  subDir: "projects",
+  name: "fixedpoint_nim",
+  content: projects_fixedpoint_nim.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/godot_exchange_scene as projects_godot_exchange_scene
+contents.add Content(
+  index: 1,
+  subDir: "projects",
+  name: "godot_exchange_scene",
+  content: projects_godot_exchange_scene.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/this_website as projects_this_website
+contents.add Content(
+  index: 10,
+  subDir: "projects",
+  name: "this_website",
+  content: projects_this_website.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/tree_sitter_nim as projects_tree_sitter_nim
+contents.add Content(
+  index: 6,
+  subDir: "projects",
+  name: "tree_sitter_nim",
+  content: projects_tree_sitter_nim.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/nosey_nim as projects_nosey_nim
+contents.add Content(
+  index: 9,
+  subDir: "projects",
+  name: "nosey_nim",
+  content: projects_nosey_nim.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
+)
+import content/projects/fomu_trng as projects_fomu_trng
+contents.add Content(
+  index: 5,
+  subDir: "projects",
+  name: "fomu_trng",
+  content: projects_fomu_trng.createDom,
+  creationTime: "11-02-2023 17:42",
+  lastWriteTime: "11-02-2023 17:42"
 )
