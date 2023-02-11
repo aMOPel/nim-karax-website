@@ -1,7 +1,7 @@
 # godot-exchange-scene
 
 <a href="https://github.com/aMOPel/godot-xchange-scene">
-<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
 GitHub</a>
 
 This is a utility library for the [Godot Game Engine](https://godotengine.org/)

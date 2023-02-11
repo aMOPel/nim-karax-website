@@ -5,7 +5,7 @@ proc createDom*(): VNode =
     h1:
       text "godot-tetris-clone"
     a(href = "https://github.com/aMOPel/godot-tetris-clone"):
-      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      img(src = "assets/icons8-github.svg", class = "inline m-1", alt = "GitHub")
       text "GitHub"
     p:
       text "A simple Tetris clone made with the "
@@ -13,7 +13,7 @@ proc createDom*(): VNode =
         text "Godot Game Engine"
       text "."
     p:
-      img(src = "tetris_in_game.png", alt = "Tetris In Game")
+      img(src = "assets/tetris_in_game.png", alt = "Tetris In Game")
     p:
       text "It uses my other 2 Godot projects: "
       a(href = "#/godot_exchange_scene"):

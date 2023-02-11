@@ -153,10 +153,10 @@ when isMainModule:
           targetDir = p.val
           echo "using target directory " & p.val
       of ["h", "help"]:
-        echo """
-    -s=[sourceDir]    default: "content"
-    -t=[targetDir]    default: "src/website/content"
-    -j=[jsonFile]     default: "../contentHashes.json"
+        echo &"""
+    -s=[sourceDir]    default: {sourceDir}
+    -t=[targetDir]    default: {targetDir}
+    -j=[jsonFile]     default: {jsonFile}
     -w                run watcher
     """
         quit()
@@ -169,7 +169,7 @@ when isMainModule:
     watch(
       sourceDir,
       targetDir,
-      5000,
+      1000,
       mdToKarax,
       rmKarax,
       jsonFile,
@@ -180,7 +180,8 @@ when isMainModule:
       ss: DirState
       ncd: NewChangedDeleted
     try:
-      ss = readFile(jsonFile).parseJson.to(ss.type) 
+      if jsonFile != "":
+        ss = readFile(jsonFile).parseJson.to(ss.type) 
     except JsonParsingError, IOError:
       let e = getCurrentException()
       echo &"{e.name}: {e.msg}"
@@ -190,4 +191,5 @@ when isMainModule:
       ss = DirState(dirName: sourceDir)
     ncd = ss.updateDirState
     applyDirState(ss, targetDir, ncd, mdToKarax, rmKarax)
-    writeFile(jsonFile.addFileExt("json"), $ %*ss)
+    if jsonFile != "":
+      writeFile(jsonFile.addFileExt("json"), $ %*ss)

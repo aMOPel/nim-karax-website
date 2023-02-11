@@ -5,15 +5,14 @@ set -e
 
 # build
 cd nim
-nim c --outDir:bin --verbosity:0 --listfullpaths ./transpileMarkdown.nim && ./bin/transpileMarkdown
-./nimbledeps/bin/karun ./src/website.nim
-npx tailwindcss -i ./prestyles.css -o ./assets/styles.css
+nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/transpileMarkdown.nim && ./bin/transpileMarkdown
+nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build
+nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/putAssets.nim && ./bin/putAssets
 cd -
 
-mkdir -p dist/assets
-cp nim/assets/* dist/
-cp nim/app.html dist/index.html
-cp nim/app.js dist/app.js
+cd tailwind
+npx tailwindcss -i ./prestyles.css -o ../dist/styles.css
+cd -
 
 # navigate into the build output directory
 cd dist

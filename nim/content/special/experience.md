@@ -1,7 +1,7 @@
 # Experience
 
 <a href="https://github.com/aMOPel">
-<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
 GitHub Profile</a>
 
 

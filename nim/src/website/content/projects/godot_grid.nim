@@ -5,7 +5,7 @@ proc createDom*(): VNode =
     h1:
       text "godot-grid"
     a(href = "https://github.com/aMOPel/godot-grid"):
-      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      img(src = "assets/icons8-github.svg", class = "inline m-1", alt = "GitHub")
       text "GitHub"
     p:
       text "This is a utility library for the "

@@ -12,20 +12,25 @@ cd nim
 
 # recompile and start markdown watcher
 # needs separate shell
-nim c --outDir:bin --verbosity:0 --listfullpaths ./transpileMarkdown.nim && ./bin/transpileMarkdown -w
+nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/transpileMarkdown.nim && ./bin/transpileMarkdown -w
 
-# start http server 
+# start build watcher
 # needs separate shell
-./nimbledeps/bin/karun -r -w ./src/website.nim        
+nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build -w
 
+# start asset watcher
+# needs separate shell
+nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/putAssets.nim && ./bin/putAssets -w
+
+# start http server hosting at localhost:8080
+# needs separate shell
+./nimbledeps/bin/nimhttpd -p:8080 ../dist
+
+cd ../tailwind
 # start tailwind watcher
 # needs separate shell
-npx tailwindcss -i ./assets/prestyles.css -o ./assets/styles.css --watch
+npx tailwindcss -i ./prestyles.css -o ../dist/styles.css --watch
 
-# recompilation should work automatically because all build tools use the watch flag (-w/--watch)
-# but if it doesn't work:
-# recompile website manually
-./bin/transpileMarkdown && nim js --out:./app.js ./src/website.nim                  
 ```
 
 Or convenient shell alias using `zsh` shell and `kitty` terminal:
@@ -34,11 +39,11 @@ Or convenient shell alias using `zsh` shell and `kitty` terminal:
 website () {
   p=~/Documents/website
   pn=$p/nim
-  # opens windows for the 3 watchers
-  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "nim c --outDir:bin --verbosity:0 --listfullpaths ./transpileMarkdown.nim && ./bin/transpileMarkdown -w"
-  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "./nimbledeps/bin/karun -r -w ./src/website.nim"
-  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "npx tailwindcss -i ./assets/prestyles.css -o ./assets/styles.css --watch"
-  # launches neovim session in a new tab afterwards
+  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/transpileMarkdown.nim && ./bin/transpileMarkdown -w"
+  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build -w"
+  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/putAssets.nim && ./bin/putAssets -w"
+  kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "./nimbledeps/bin/nimhttpd -p:8080 ../dist"
+  kitty @ launch --type=window --cwd=$p/tailwind --keep-focus zsh -c "npx tailwindcss -i ./prestyles.css -o ../dist/styles.css --watch"
   kitty @ launch --type=tab --cwd=$p zsh -c "nvim -S Session.vim"
 }
 ```

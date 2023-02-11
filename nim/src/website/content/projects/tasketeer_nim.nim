@@ -5,7 +5,7 @@ proc createDom*(): VNode =
     h1:
       text "tasketeer.nim"
     a(href = "https://github.com/aMOPel/tasketeer.nim"):
-      img(src = "icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      img(src = "assets/icons8-github.svg", class = "inline m-1", alt = "GitHub")
       text "GitHub"
     p:
       text "Tasketeer is a prototype of a To-Do App made with "

@@ -4,8 +4,8 @@ import globals
 
 var
   menuContent = tdiv.tree
-  menuImage = "icons8-menu.svg"
-  cancelImage = "icons8-close.svg"
+  menuImage = "assets/icons8-menu.svg"
+  cancelImage = "assets/icons8-close.svg"
   buttonImage = menuImage
 
   kxi: KaraxInstance

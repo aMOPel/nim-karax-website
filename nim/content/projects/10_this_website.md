@@ -1,7 +1,7 @@
 # This Website
 
 <a href="https://github.com/aMOPel/nim-karax-website/tree/amopels_content">
-<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
 GitHub</a>
 
 This very website 

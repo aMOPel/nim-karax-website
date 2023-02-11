@@ -1,7 +1,7 @@
 # tree-sitter-nim
 
 <a href="https://github.com/aMOPel/tree-sitter-nim">
-<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
 GitHub</a>
 
 This project is so far the best effort on GitHub to create 

@@ -1,7 +1,7 @@
 # dotfiles
 
 <a href="https://github.com/aMOPel/dotfiles">
-<img src="icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
 GitHub</a>
 
 Dotfiles contains my configuration files for the development tools.
