@@ -5,12 +5,9 @@ var
   outPath* {.threadvar.}: string
   lastBuildTime* = getTime() - initDuration(seconds=2)
 
-proc updateBuild*(sourceFilePath, targetDir: string) {.thread.} =
-  if outPath != "" and 
-  not outPath.startsWith "--out:":
-    outPath = &"""--out:"{outPath}""""
+proc updateHtml*(sourceFilePath, targetDir: string) {.thread.} =
   let
-    cmd = &"nim js {outPath} {inPath}"
+    cmd = &"nim r {inPath} {outPath}"
     now = getTime()
     durationSinceLastBuild = now - lastBuildTime
   if durationSinceLastBuild.inSeconds > 1:

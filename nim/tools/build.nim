@@ -1,10 +1,11 @@
 import std/[os, threadpool, browsers]
-import nosey
-import buildJs, transpileMarkdown
+import pkg/[nosey]
+import buildJs, transpileMarkdown, buildHtml
 
 type Mode = enum mWatch, mOnce
 
 template runOnceOrWatch =
+  targetDir.createDir
   case mode:
   of mOnce:
     runOnce(
@@ -34,9 +35,21 @@ proc runBuildJs(mode: Mode) {.thread.} =
     sourceStateJson = ""
     fileConverter = updateBuild
     fileRemover = updateBuild
-  targetDir.createDir
-  inPath = sourceDir/inFile
-  outPath = targetDir/outFile
+  buildJs.inPath = sourceDir/inFile
+  buildJs.outPath = targetDir/outFile
+  runOnceOrWatch()
+
+proc runBuildHtml(mode: Mode) {.thread.} =
+  let
+    sourceDir = "buildHtml/"
+    targetDir = "../dist/"
+    inFile = "indexHtml.nim"
+    outFile = "index.html"
+    sourceStateJson = ""
+    fileConverter = updateHtml
+    fileRemover = updateHtml
+  buildHtml.inPath = sourceDir/inFile
+  buildHtml.outPath = targetDir/outFile
   runOnceOrWatch()
 
 proc runPutAssets(mode: Mode) {.thread.} =
@@ -46,7 +59,6 @@ proc runPutAssets(mode: Mode) {.thread.} =
     sourceStateJson = ""
     fileConverter = defaultFileConverter
     fileRemover = defaultFileRemover
-  targetDir.createDir
   runOnceOrWatch()
 
 proc runTranspileMarkdown(mode: Mode) {.thread.} =
@@ -83,6 +95,7 @@ when isMainModule:
       echo "doesn't accept arguments"
 
   spawn runBuildJs(mode)
+  spawn runBuildHtml(mode)
   spawn runPutAssets(mode)
   spawn runTranspileMarkdown(mode)
 
