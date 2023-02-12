@@ -13,7 +13,4 @@ Session.vim
 
 node_modules/
 nim/assets/styles.css
-dist/*.*
-dist/assets/*.*
-!dist/assets/.keep
-!dist/index.html
+dist/

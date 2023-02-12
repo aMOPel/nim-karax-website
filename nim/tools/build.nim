@@ -34,6 +34,7 @@ proc runBuildJs(mode: Mode) {.thread.} =
     sourceStateJson = ""
     fileConverter = updateBuild
     fileRemover = updateBuild
+  targetDir.createDir
   inPath = sourceDir/inFile
   outPath = targetDir/outFile
   runOnceOrWatch()
@@ -45,6 +46,7 @@ proc runPutAssets(mode: Mode) {.thread.} =
     sourceStateJson = ""
     fileConverter = defaultFileConverter
     fileRemover = defaultFileRemover
+  targetDir.createDir
   runOnceOrWatch()
 
 proc runTranspileMarkdown(mode: Mode) {.thread.} =
