@@ -14,6 +14,7 @@ cd nim
 # it rebuilds website.nim when src/ changes
 # it deployes assets from ../assets/ to ../dist/assets when ../assets/ changes
 # it transpiles markdown to karax DSL when ../markdown/content/ changes
+# it generates index.html when buildHtml/ changes
 # needs separate shell
 nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build -w
 
@@ -21,12 +22,12 @@ nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/buil
 
 # start http server hosting at localhost:8080
 # needs separate shell
-./nimbledeps/bin/nimhttpd -p:8080 ../dist
+./nimbledeps/bin/nimhttpd -p:8080 ../build
 
 cd ../tailwind
 # start tailwind watcher
 # needs separate shell
-npx tailwindcss -i ./prestyles.css -o ../dist/styles.css --watch
+npx tailwindcss -i ./prestyles.css -o ../build/styles.css --watch
 
 ```
 
@@ -37,8 +38,8 @@ website () {
 p=~/Documents/website
 pn=$p/nim
 kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build -w"
-kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "./nimbledeps/bin/nimhttpd -p:8080 ../dist"
-kitty @ launch --type=window --cwd=$p/tailwind --keep-focus zsh -c "npx tailwindcss -i ./prestyles.css -o ../dist/styles.css --watch"
+kitty @ launch --type=window --cwd=$pn --keep-focus zsh -c "./nimbledeps/bin/nimhttpd -p:8080 ../build"
+kitty @ launch --type=window --cwd=$p/devtools --keep-focus zsh -c "npx tailwindcss -i ./prestyles.css -o ../build/styles.css --watch"
 kitty @ launch --type=tab --cwd=$p zsh -c "nvim -S Session.vim"
 }
 ```

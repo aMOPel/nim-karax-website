@@ -29,7 +29,7 @@ template runOnceOrWatch =
 proc runBuildJs(mode: Mode) {.thread.} =
   let
     sourceDir = "src/"
-    targetDir = "../dist/"
+    targetDir = "../build/"
     inFile = "website.nim"
     outFile = "app.js"
     sourceStateJson = ""
@@ -42,7 +42,7 @@ proc runBuildJs(mode: Mode) {.thread.} =
 proc runBuildHtml(mode: Mode) {.thread.} =
   let
     sourceDir = "buildHtml/"
-    targetDir = "../dist/"
+    targetDir = "../build/"
     inFile = "indexHtml.nim"
     outFile = "index.html"
     sourceStateJson = ""
@@ -55,7 +55,7 @@ proc runBuildHtml(mode: Mode) {.thread.} =
 proc runPutAssets(mode: Mode) {.thread.} =
   let
     sourceDir = "../assets/"
-    targetDir = "../dist/assets/"
+    targetDir = "../build/assets/"
     sourceStateJson = ""
     fileConverter = defaultFileConverter
     fileRemover = defaultFileRemover
