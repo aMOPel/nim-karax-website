@@ -1,105 +1,89 @@
-import std/[os, strformat, strutils, times]
+import std/[os, threadpool, browsers]
 import nosey
+import buildJs, transpileMarkdown
 
-when isMainModule:
-  var 
-    inPath, outPath: string
-    lastBuildTime = getTime() - initDuration(seconds=2)
+type Mode = enum mWatch, mOnce
 
-  proc updateBuild(sourceFilePath, targetDir: string) =
-    if outPath != "" and 
-      not outPath.startsWith "--out:":
-      outPath = &"""--out:"{outPath}""""
-    let
-      cmd = &"nim js {outPath} {inPath}"
-      now = getTime()
-      durationSinceLastBuild = now - lastBuildTime
-    if durationSinceLastBuild.inSeconds > 1:
-      let errorCode = os.execShellCmd(cmd)
-      lastBuildTime = now
-      if errorCode != 0: quit(errorCode)
+template runOnceOrWatch =
+  case mode:
+  of mOnce:
+    runOnce(
+      sourceDir,
+      targetDir,
+      fileConverter,
+      fileRemover,
+      sourceStateJson,
+    )
+  of mWatch:
+    watch(
+      sourceDir,
+      targetDir,
+      1000,
+      fileConverter,
+      fileRemover,
+      sourceStateJson,
+      doNothingWhenNoJson=false
+    )
 
-  # parse cmdline -w and/or -j=[file]
-  import std/[parseopt, json]
-  type Mode = enum mWatch, mOnce
-  var
-    sourceDir = "src"
-    targetDir = "../dist"
+proc runBuildJs(mode: Mode) {.thread.} =
+  let
+    sourceDir = "src/"
+    targetDir = "../dist/"
     inFile = "website.nim"
     outFile = "app.js"
-    jsonFile = ""
-    mode = mOnce
+    sourceStateJson = ""
+    fileConverter = updateBuild
+    fileRemover = updateBuild
+  inPath = sourceDir/inFile
+  outPath = targetDir/outFile
+  runOnceOrWatch()
+
+proc runPutAssets(mode: Mode) {.thread.} =
+  let
+    sourceDir = "../assets/"
+    targetDir = "../dist/assets/"
+    sourceStateJson = ""
+    fileConverter = defaultFileConverter
+    fileRemover = defaultFileRemover
+  runOnceOrWatch()
+
+proc runTranspileMarkdown(mode: Mode) {.thread.} =
+  let
+    sourceDir = "../markdown/content/"
+    targetDir = "src/website/content/"
+    sourceStateJson = "../markdown/contentHashes.json"
+    fileConverter = mdToKarax
+    fileRemover = rmKarax
+  runOnceOrWatch()
+
+when isMainModule:
+  # parse cmdline -w and
+  import std/parseopt
+  var mode = mOnce
+
   var p = commandLineParams().initOptParser(shortNoVal={'w'})
   while true:
     p.next()
     case p.kind:
-      of cmdEnd: break
-      of cmdShortOption, cmdLongOption:
-        case p.key:
-          of "o":
-            if p.val != "":
-              outPath = p.val
-            echo "using out file " & p.val
-          of "j":
-            if p.val != "":
-              jsonFile = p.val
-            echo "using json file " & p.val
-          of "w":
-            mode = mWatch
-            echo "going into watch mode"
-          of "s":
-            if p.val != "":
-              sourceDir = p.val
-              echo "using source directory " & p.val
-          of "t":
-            if p.val != "":
-              targetDir = p.val
-              echo "using target directory " & p.val
-          of ["h", "help"]:
-            echo """
-            buildWatcher [OPTIONS] [FILE]
-            [FILE]            default: {inFile}
-            -o=[outFile]      default: {outFile}
-            -s=[sourceDir]    default: {sourceDir}
-            -t=[targetDir]    default: {targetDir}
-            -j=[jsonFile]     default: {jsonFile}
-            -w                run watcher
-            """
-            quit()
-      of cmdArgument:
-        if p.val != "":
-          inPath = p.val
-          break
+    of cmdEnd: break
+    of cmdShortOption, cmdLongOption:
+      case p.key:
+      of "w":
+        mode = mWatch
+        echo "going into watch mode"
+      of ["h", "help"]:
+        echo """
+        build [OPTIONS]
+        -w    run watcher
+        """
+        quit()
+    of cmdArgument:
+      echo "doesn't accept arguments"
 
-  inPath = sourceDir/inFile
-  outPath = targetDir/outFile
+  spawn runBuildJs(mode)
+  spawn runPutAssets(mode)
+  spawn runTranspileMarkdown(mode)
 
-  # running
-  case mode:
-    of mWatch:
-      watch(
-        sourceDir,
-        targetDir,
-        1000,
-        updateBuild,
-        updateBuild,
-        jsonFile,
-        doNothingWhenNoJson=false
-      )
-    of mOnce:
-      var 
-        ss = DirState(dirName: sourceDir)
-        ncd: NewChangedDeleted
-      try:
-        if jsonFile != "":
-          ss = readFile(jsonFile).parseJson.to(ss.type) 
-      except JsonParsingError, IOError:
-        let e = getCurrentException()
-        echo &"{e.name}: {e.msg}"
-        echo "using current state of " & sourceDir & 
-          " and creating " & jsonFile & " later"
-        echo ""
-      ncd = ss.updateDirState
-      applyDirState(ss, targetDir, ncd, updateBuild, updateBuild)
-      if jsonFile != "":
-        writeFile(jsonFile.addFileExt("json"), $ %*ss)
+  if mode == mWatch:
+    openDefaultBrowser "http://localhost:8080/#/"
+  sync()

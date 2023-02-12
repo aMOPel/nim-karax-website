@@ -27,7 +27,7 @@ contents.add Content(
   name: "experience",
   content: special_experience.createDom,
   creationTime: "11-02-2023 17:42",
-  lastWriteTime: "11-02-2023 22:02"
+  lastWriteTime: "12-02-2023 12:56"
 )
 import content/projects/godot_grid as projects_godot_grid
 contents.add Content(

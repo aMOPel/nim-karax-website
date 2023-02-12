@@ -4,7 +4,6 @@
 <img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
 GitHub Profile</a>
 
-
 My experience gathered in programming related fields so far.
 
 ## Programming languages 

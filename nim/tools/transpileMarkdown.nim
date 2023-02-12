@@ -1,5 +1,4 @@
 import std/[strformat, osproc, os, strutils, times, re]
-import nosey
 
 const dateFormat = "dd-MM-yyyy HH:mm"
 
@@ -23,7 +22,7 @@ proc findCommonSubDirs(sourceDir, targetDir: string): string =
   if tIndex != -1:
     result = t[tIndex+1..^1].join("/")
 
-proc mdToKarax(sourceFilePath, targetDir: string) =
+proc mdToKarax*(sourceFilePath, targetDir: string) =
   echo &"Updating {targetDir/sourceFilePath.splitPath.tail}"
   let 
     mdFileName = sourceFilePath
@@ -85,7 +84,7 @@ contents.add Content(
   else:
     ccFileName.writeFile(ccRead.replacef(re ccTemplatePattern, ccTemplateSub))
 
-proc rmKarax(sourceFilePath, targetDir: string) =
+proc rmKarax*(sourceFilePath, targetDir: string) =
   echo &"Removing {targetDir/sourceFilePath.splitPath.tail}"
   let 
     (sourceDir, name, _) = sourceFilePath.splitFile
@@ -120,76 +119,3 @@ contents.add Content(
 """
   ccFileName.writeFile(ccRead.replace(re ccTemplatePattern, ""))
 
-when isMainModule:
-
-  # parse cmdline -w and/or -j=[file]
-  import std/[parseopt, json]
-  type Mode = enum mWatch, mOnce
-  var
-    sourceDir = "content"
-    targetDir = "src/website/content"
-    jsonFile = "../contentHashes.json"
-    mode = mOnce
-  var p = commandLineParams().initOptParser(shortNoVal={'w'})
-  while true:
-    p.next()
-    case p.kind:
-    of cmdEnd: break
-    of cmdShortOption, cmdLongOption:
-      case p.key:
-      of "j":
-        if p.val != "":
-          jsonFile = p.val
-          echo "using json file " & p.val
-      of "w":
-        mode = mWatch
-        echo "going into watch mode"
-      of "s":
-        if p.val != "":
-          sourceDir = p.val
-          echo "using source directory " & p.val
-      of "t":
-        if p.val != "":
-          targetDir = p.val
-          echo "using target directory " & p.val
-      of ["h", "help"]:
-        echo &"""
-    -s=[sourceDir]    default: {sourceDir}
-    -t=[targetDir]    default: {targetDir}
-    -j=[jsonFile]     default: {jsonFile}
-    -w                run watcher
-    """
-        quit()
-    of cmdArgument:
-      echo "doesn't accept arguments"
-
-  # running
-  case mode:
-  of mWatch:
-    watch(
-      sourceDir,
-      targetDir,
-      1000,
-      mdToKarax,
-      rmKarax,
-      jsonFile,
-      doNothingWhenNoJson=false
-    )
-  of mOnce:
-    var 
-      ss: DirState
-      ncd: NewChangedDeleted
-    try:
-      if jsonFile != "":
-        ss = readFile(jsonFile).parseJson.to(ss.type) 
-    except JsonParsingError, IOError:
-      let e = getCurrentException()
-      echo &"{e.name}: {e.msg}"
-      echo "using current state of " & sourceDir & 
-        " and creating " & jsonFile & " later"
-      echo ""
-      ss = DirState(dirName: sourceDir)
-    ncd = ss.updateDirState
-    applyDirState(ss, targetDir, ncd, mdToKarax, rmKarax)
-    if jsonFile != "":
-      writeFile(jsonFile.addFileExt("json"), $ %*ss)

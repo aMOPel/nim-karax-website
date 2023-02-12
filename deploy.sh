@@ -5,9 +5,7 @@ set -e
 
 # build
 cd nim
-nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/transpileMarkdown.nim && ./bin/transpileMarkdown
 nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build
-nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/putAssets.nim && ./bin/putAssets
 cd -
 
 cd tailwind
