@@ -74,4 +74,4 @@ proc buildMobileMenu*(
       hover:border-2 hover:border-red dark:hover:border-dmred
       hover:shadow-md hover:shadow-black
     """, onclick=toggleMenu):
-      img(src=buttonImage, class="w-10 h-10")
+      img(src=buttonImage, class="w-10 h-10 dark:invert")
