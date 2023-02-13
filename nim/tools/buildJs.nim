@@ -14,6 +14,5 @@ proc updateBuild*(sourceFilePath, targetDir: string) {.thread.} =
     now = getTime()
     durationSinceLastBuild = now - lastBuildTime
   if durationSinceLastBuild.inSeconds > 1:
-    let errorCode = os.execShellCmd(cmd)
+    discard os.execShellCmd(cmd)
     lastBuildTime = now
-    if errorCode != 0: quit(errorCode)
