@@ -5,13 +5,13 @@ root=$(pwd)
 build=$root/build
 dist=$root/dist
 nim=$root/nim
-src=$nim/src
 tools=$nim/tools
 bin=$nim/bin
-nimContent=$src/website/content
 assets=$root/assets
-markdown=$root/markdown
 devtools=$root/devtools
+# src=$nim/src
+# nimContent=$src/website/content
+# content=$root/content
 
 mkdir -p $build
 mkdir -p $dist

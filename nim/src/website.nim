@@ -13,6 +13,7 @@ proc createDom(route: RouterData): VNode =
     content = buildIndex()
   elif route.hashPart == "#/experience":
     content = contents["special"]["experience"].content()
+    content.insert(contents["special"]["experience"].buildDates, 0)
   elif route.hashPart.`$` in ["#/", "", "#/home"]:
     content = contents["special"]["home"].content()
   else:

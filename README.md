@@ -13,7 +13,7 @@ cd nim
 # recompile and start build watcher
 # it rebuilds website.nim when src/ changes
 # it deployes assets from ../assets/ to ../dist/assets when ../assets/ changes
-# it transpiles markdown to karax DSL when ../markdown/content/ changes
+# it transpiles markdown to karax DSL when ../content/ changes
 # it generates index.html when buildHtml/ changes
 # needs separate shell
 nim c --outDir:bin --verbosity:0 --listfullpaths ./tools/build.nim && ./bin/build -w

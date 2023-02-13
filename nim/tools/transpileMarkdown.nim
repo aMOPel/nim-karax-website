@@ -1,6 +1,4 @@
-import std/[strformat, osproc, os, strutils, times, re]
-
-const dateFormat = "dd-MM-yyyy HH:mm"
+import std/[strformat, osproc, os, strutils, re, tables]
 
 proc splitIndex(fileName: string):
   tuple[index: int, nameWithoutIndex: string] =
@@ -22,6 +20,16 @@ proc findCommonSubDirs(sourceDir, targetDir: string): string =
   if tIndex != -1:
     result = t[tIndex+1..^1].join("/")
 
+proc parseMarkdownMetaData(fileName: string): Table[string, string] =
+  for l in fileName.lines:
+    if not l.startsWith("["):
+      break
+    var kvpair: array[2, string]
+    if l.match(re"""^\s*\[\s*(.*)\s*\]:-\s*"(.*)"\s*$""", kvpair):
+      discard result.hasKeyOrPut(kvpair[0], kvpair[1])
+    else:
+      echo "nothing found in " & l
+
 proc mdToKarax*(sourceFilePath, targetDir: string) =
   echo &"Updating {targetDir/sourceFilePath.splitPath.tail}"
   let 
@@ -32,7 +40,9 @@ proc mdToKarax*(sourceFilePath, targetDir: string) =
     htmlFileName = sourceFilePath.changeFileExt "html"
     nimFileName = targetDir/sourceFileName.changeFileExt("nim")
     moduleName =  &"{subDir}_{sourceFileName}"
-    currentDate = now().format dateFormat
+    mdMetaTable = mdFileName.parseMarkdownMetaData
+    creationTime = mdMetaTable.getOrDefault "creationTime"
+    lastWriteTime = mdMetaTable.getOrDefault "lastWriteTime"
   createDir targetDir
   discard execCmd(&"./nimbledeps/bin/markdown < {mdFileName} > {htmlFileName}")
   discard execCmd(&"./nimbledeps/bin/html2karax {htmlFileName} --out:{nimFileName}")
@@ -73,13 +83,8 @@ contents.add Content(
 \)
 """
     ccTemplateNew = ccTemplateBase & &"""
-  creationTime: "{currentDate}",
-  lastWriteTime: "{currentDate}"
-)
-"""
-    ccTemplateSub = ccTemplateBase & &"""
-  creationTime: "$1",
-  lastWriteTime: "{currentDate}"
+  creationTime: "{creationTime}",
+  lastWriteTime: "{lastWriteTime}"
 )
 """
   if ccRead.find(ccTemplateBase) < 0:
@@ -87,7 +92,7 @@ contents.add Content(
     ccAppend.write(ccTemplateNew)
     ccAppend.close()
   else:
-    ccFileName.writeFile(ccRead.replacef(re ccTemplatePattern, ccTemplateSub))
+    ccFileName.writeFile(ccRead.replacef(re ccTemplatePattern, ccTemplateNew))
 
 proc rmKarax*(sourceFilePath, targetDir: string) =
   echo &"Removing {targetDir/sourceFilePath.splitPath.tail}"

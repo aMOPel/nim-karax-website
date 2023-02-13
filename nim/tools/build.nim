@@ -63,7 +63,7 @@ proc runPutAssets(mode: Mode) {.thread.} =
 
 proc runTranspileMarkdown(mode: Mode) {.thread.} =
   let
-    sourceDir = "../markdown/content/"
+    sourceDir = "../content/"
     targetDir = "src/website/content/"
     sourceStateJson = ""
     fileConverter = mdToKarax
