@@ -65,7 +65,7 @@ proc runTranspileMarkdown(mode: Mode) {.thread.} =
   let
     sourceDir = "../markdown/content/"
     targetDir = "src/website/content/"
-    sourceStateJson = "../markdown/contentHashes.json"
+    sourceStateJson = ""
     fileConverter = mdToKarax
     fileRemover = rmKarax
   runOnceOrWatch()

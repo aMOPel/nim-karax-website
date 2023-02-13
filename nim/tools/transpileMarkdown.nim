@@ -54,7 +54,8 @@ proc createDom*(): VNode =
   writeFile(nimFileName, nimFile)
   removeFile(htmlFileName)
 
-  const ccFileName = "src/website/contentCollection.nim"
+  const ccFileName = "src/website/contentImports.nim"
+  if not ccFileName.fileExists: ccFileName.writeFile ""
 
   var
     ccRead = ccFileName.readFile
@@ -105,7 +106,8 @@ proc rmKarax*(sourceFilePath, targetDir: string) =
     echo &"Removing {targetDir} since it's empty now"
     targetDir.removeDir
 
-  const ccFileName = "src/website/contentCollection.nim"
+  const ccFileName = "src/website/contentImports.nim"
+  if not ccFileName.fileExists: ccFileName.writeFile ""
   var
     ccRead = ccFileName.readFile
     ccTemplateBase = &"""
