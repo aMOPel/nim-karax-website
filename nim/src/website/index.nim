@@ -1,8 +1,7 @@
-include karax / prelude
-import std/[strformat]
+import pkg/karax/[vdom, karaxdsl, kbase]
 import globals, dates
 
-proc buildIndex*(kxi: KaraxInstance): VNode =
+proc buildIndex*(): VNode =
   result = buildHtml(nav):
     ul(class="""
          list-none m-0 p-0 
@@ -13,7 +12,7 @@ proc buildIndex*(kxi: KaraxInstance): VNode =
           tdiv(class="""
             m-0 p-0
           """):
-            a(href= &"#/{name}", onclick=kxi.onClickRedraw,
+            a(href= kstring("#/" & name),
               class="""
                 no-underline dark:hover:text-dmblack hover:text-black
               """):

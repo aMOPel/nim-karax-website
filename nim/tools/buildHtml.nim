@@ -1,4 +1,4 @@
-import std/[os, strformat, strutils, times]
+import std/[os, strformat, times]
 
 var 
   inPath* {.threadvar.}:string

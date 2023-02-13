@@ -1,21 +1,16 @@
-include karax / prelude
-import std/[sequtils, strformat]
+import pkg/karax/[vdom, karaxdsl, karax, kbase]
+import std/[sequtils]
 import globals
 
 var
   menuContent = tdiv.tree
-  menuImage = "assets/icons8-menu.svg"
-  cancelImage = "assets/icons8-close.svg"
+  menuImage = "assets/icons8-menu.svg".kstring
+  cancelImage = "assets/icons8-close.svg".kstring
   buttonImage = menuImage
 
-  kxi: KaraxInstance
   menu: seq[MenuItem]
 
 proc toggleMenu()
-
-proc onClickRedrawAndCloseMenu() =
-  onClickRedraw(kxi)()
-  toggleMenu()
 
 proc buildMobileMenuContent(): VNode =
   result = buildHtml(nav(class="""
@@ -36,7 +31,7 @@ proc buildMobileMenuContent(): VNode =
             w-screen
           """):
             a(class="""
-            """, href = &"#/{href}", onclick=onClickRedrawAndCloseMenu):
+            """, href = kstring("#/" & href), onclick=toggleMenu):
               tdiv(class="""
                 w-full
                 border-2 border-grey dark:border-dmgrey
@@ -56,10 +51,8 @@ proc toggleMenu() =
     menuContent = buildMobileMenuContent()
 
 proc buildMobileMenu*(
-  kxi: KaraxInstance,
   menu: openArray[MenuItem]
   ): VNode =
-  mobileMenu.kxi = kxi
   mobileMenu.menu = menu.toSeq
 
   result = buildHtml(tdiv(class="""

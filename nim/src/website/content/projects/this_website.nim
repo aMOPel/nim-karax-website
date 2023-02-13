@@ -1,4 +1,4 @@
-include karax / prelude
+import pkg/karax/[vdom, karaxdsl]
 
 proc createDom*(): VNode =
   result = buildHtml(article):
@@ -66,14 +66,13 @@ and matched as needed."""
     pre:
       code(class = "language-nim"):
         text """proc buildMenu*(
-  kxi: KaraxInstance,
   menu: openArray[tuple[text: string, href: string]]
 ): VNode =
   result = buildHtml(nav(class="...")):
     ul(class="..."):
       for (t, href) in menu:
         li(class="..."):
-          a(class="...", href = &"#/{href}", onclick=kxi.onClickRedraw):
+          a(class="...", href = &"#/{href}"):
             text t
 """
     p:

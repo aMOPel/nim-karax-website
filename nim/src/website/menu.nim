@@ -1,17 +1,14 @@
-include karax / prelude
-import std/[strformat]
-import karax/kdom
+import pkg/karax/[vdom, karaxdsl, kdom, kbase]
 import globals
 import mobileMenu
 
 
 
 proc buildMenu*(
-  kxi: KaraxInstance,
   menu: openArray[MenuItem]
 ): VNode =
   if clientWidth() < mobileMenuWidthThreshold:
-    result = buildMobileMenu(kxi, menu)
+    result = buildMobileMenu(menu)
   else:
     result = buildHtml(nav(class="""
       bg-grey dark:bg-dmgrey 
@@ -35,5 +32,5 @@ proc buildMenu*(
                 border-2 border-grey dark:border-dmgrey
                 hover:border-red dark:hover:border-dmred
                 hover:shadow-black hover:shadow-md
-              """, href = &"#/{href}", onclick=kxi.onClickRedraw):
+              """, href=kstring("#/" & href)):
                 text t

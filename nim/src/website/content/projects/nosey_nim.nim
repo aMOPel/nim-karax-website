@@ -1,4 +1,4 @@
-include karax / prelude
+import pkg/karax/[vdom, karaxdsl]
 
 proc createDom*(): VNode =
   result = buildHtml(article):

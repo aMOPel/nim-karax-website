@@ -40,14 +40,13 @@ Example:
 *The menu component with collapsed Tailwind classes:*
 ```nim
 proc buildMenu*(
-  kxi: KaraxInstance,
   menu: openArray[tuple[text: string, href: string]]
 ): VNode =
   result = buildHtml(nav(class="...")):
     ul(class="..."):
       for (t, href) in menu:
         li(class="..."):
-          a(class="...", href = &"#/{href}", onclick=kxi.onClickRedraw):
+          a(class="...", href = &"#/{href}"):
             text t
 ```
 Since the Tailwind classes are just strings in Nim,

@@ -1,6 +1,5 @@
-include karax / prelude
-import std/[algorithm, sugar, times, tables]
-import karax/kdom
+import std/[algorithm, sugar, tables]
+# import std/[algorithm, sugar, times, tables]
 import contentCollection
 
 export contentCollection.Content
@@ -16,16 +15,17 @@ var
   contents*: ContentsBySub
   sortedContents = contentCollection.contents
 
+
 proc sortByIndex(cs: var seq[Content], order=Descending) =
   cs.sort(
     (x,y:Content) => cmp(x.index, y.index),
     order=order)
 
-proc sortByCreationTime(cs: var seq[Content], order=Descending) =
-  cs.sort(
-    (x,y:Content) => 
-      cmp(x.creationTime.parse(dateFormat), y.creationTime.parse(dateFormat)),
-    order=order)
+# proc sortByCreationTime(cs: var seq[Content], order=Descending) =
+#   cs.sort(
+#     (x,y:Content) => 
+#       cmp(x.creationTime.parse(dateFormat), y.creationTime.parse(dateFormat)),
+#     order=order)
 
 proc separateIntoSubDirs(cs: seq[Content]): ContentsBySub =
   for c in cs:
@@ -36,9 +36,3 @@ proc separateIntoSubDirs(cs: seq[Content]): ContentsBySub =
 
 sortedContents.sortByIndex
 contents = sortedContents.separateIntoSubDirs
-
-# to redraw the page after a link was clicked
-proc onClickRedraw*(site: KaraxInstance): proc =
-  result = proc = 
-    site.redrawSync
-    window.scrollTo(0,0)

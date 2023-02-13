@@ -38,10 +38,14 @@ proc mdToKarax*(sourceFilePath, targetDir: string) =
   discard execCmd(&"./nimbledeps/bin/html2karax {htmlFileName} --out:{nimFileName}")
   var nimFile = readFile(nimFileName)
   nimFile = nimFile.replace("""
+include karax / prelude
+
 proc createDom(): VNode =
   result = buildHtml:
 """,
-&"""
+"""
+import pkg/karax/[vdom, karaxdsl]
+
 proc createDom*(): VNode =
   result = buildHtml(article):
 """

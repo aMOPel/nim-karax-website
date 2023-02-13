@@ -1,7 +1,6 @@
-include karax / prelude
+import pkg/karax/[vdom, karaxdsl, karax, kbase]
 # import ../content/test/test
 import website/[globals, index, menu, dates]
-import std/[strformat]
 
 # TODO: find a solution for meta data in head html and karun not allowing for that
 
@@ -11,14 +10,14 @@ var
 proc createDom(route: RouterData): VNode =
   var content: VNode
   if route.hashPart == "#/index":
-    content = kxi.buildIndex
+    content = buildIndex()
   elif route.hashPart == "#/experience":
     content = contents["special"]["experience"].content()
   elif route.hashPart.`$` in ["#/", "", "#/home"]:
     content = contents["special"]["home"].content()
   else:
     for name, c in contents["projects"]:
-      if route.hashPart == &"#/{name}":
+      if route.hashPart == kstring("#/" & name):
         content = c.content()
         content.insert(c.buildDates, 0)
         break
@@ -38,13 +37,14 @@ proc createDom(route: RouterData): VNode =
       dark:bg-dmwhite
       min-h-screen
     """)):
-    kxi.buildMenu({"Home": "home", "General Experience": "experience", "Project Index": "index"})
+    buildMenu({"Home": "home", "General Experience": "experience", "Project Index": "index"})
     if not content.isNil:
       content
 
 import karax/kdom
 proc highlight(elem: Element) {.importjs: "hljs.highlightElement(#)".}
 proc postRender(routerDate: RouterData) =
+  window.scrollTo(0,0)
   for elem in document.querySelectorAll("pre code"):
     if elem.getAttribute("hljs-rendered") != "true":
       highlight(elem)
