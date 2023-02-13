@@ -23,6 +23,7 @@ proc createDom(route: RouterData): VNode =
         content.insert(c.buildDates, 0)
         break
 
+  content.id = "content"
   content.class &= """ 
     prose dark:prose-invert
     w-full max-w-3xl p-10 mx-auto 
@@ -41,6 +42,14 @@ proc createDom(route: RouterData): VNode =
     if not content.isNil:
       content
 
-when isMainModule:
+import karax/kdom
+proc highlight(elem: Element) {.importjs: "hljs.highlightElement(#)".}
+proc postRender(routerDate: RouterData) =
+  for elem in document.querySelectorAll("pre code"):
+    if elem.getAttribute("hljs-rendered") != "true":
+      highlight(elem)
+      elem.setAttribute("hljs-rendered", "true")
 
-  kxi = setRenderer website.createDom
+when isMainModule:
+  kxi = setRenderer(website.createDom, clientPostRenderCallback=postRender)
+  setForeignNodeId "content", kxi
