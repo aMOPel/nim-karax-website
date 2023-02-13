@@ -39,7 +39,7 @@ module.exports = {
             '--tw-prose-captions': theme('colors.black'),
             '--tw-prose-code': theme('colors.black'),
             '--tw-prose-pre-code': theme('colors.black'),
-            '--tw-prose-pre-bg': theme('colors.white'),
+            '--tw-prose-pre-bg': theme('colors.grey'),
             '--tw-prose-th-borders': theme('colors.black'),
             '--tw-prose-td-borders': theme('colors.black'),
             '--tw-prose-invert-body': theme('colors.dmblack'),
@@ -55,7 +55,7 @@ module.exports = {
             '--tw-prose-invert-captions': theme('colors.dmblack'),
             '--tw-prose-invert-code': theme('colors.dmblack'),
             '--tw-prose-invert-pre-code': theme('colors.dmblack'),
-            '--tw-prose-invert-pre-bg': theme('colors.dmwhite'),
+            '--tw-prose-invert-pre-bg': theme('colors.dmgrey'),
             '--tw-prose-invert-th-borders': theme('colors.dmblack'),
             '--tw-prose-invert-td-borders': theme('colors.dmblack'),
             a: {

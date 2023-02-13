@@ -42,13 +42,33 @@ proc createDom(route: RouterData): VNode =
       content
 
 import karax/kdom
+const
+  hljsLightTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/atelier-dune-light.min.css"
+  hljsDarkTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/atelier-dune.min.css"
 proc highlight(elem: Element) {.importjs: "hljs.highlightElement(#)".}
+proc darkMode(): bool {.importjs: "window.matchMedia('(prefers-color-scheme: dark)').matches".}
+proc replaceHeadLink(href: string) =
+  var 
+    head = document.querySelector("head")
+    oldLink = document.getElementById("hljsTheme")
+    newLink = document.createElement("link")
+  newLink.setAttr("rel", "stylesheet")
+  newLink.setAttr("id", "hljsTheme")
+  newLink.setAttr("href", href)
+  if oldLink.isNil:
+    head.appendChild newLink
+  else:
+    head.replaceChild(newLink, oldLink)
+
 proc postRender(routerDate: RouterData) =
   window.scrollTo(0,0)
   for elem in document.querySelectorAll("pre code"):
     if elem.getAttribute("hljs-rendered") != "true":
       highlight(elem)
       elem.setAttribute("hljs-rendered", "true")
+  if darkMode(): replaceHeadLink(hljsDarkTheme)
+  else: replaceHeadLink(hljsLightTheme)
+
 
 when isMainModule:
   kxi = setRenderer(website.createDom, clientPostRenderCallback=postRender)
