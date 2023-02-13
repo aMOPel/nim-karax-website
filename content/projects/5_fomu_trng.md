@@ -1,3 +1,6 @@
+[creationTime]:- "Feb 13. 2023"
+[lastWriteTime]:- "Feb 13. 2023"
+
 # fomu-trng
 
 <a href="https://github.com/aMOPel/fomu-trng">

@@ -1,5 +1,5 @@
-[creationTime]:- "Mon 13 Feb 2023 05:03:24 PM CET"
-[lastWriteTime]:- "Mon 13 Feb 2023 05:03:24 PM CET"
+[creationTime]:- "Feb 13. 2023"
+[lastWriteTime]:- "Feb 13. 2023"
 
 # This Website
 
