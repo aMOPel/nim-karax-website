@@ -1,7 +1,7 @@
 # nosey.nim
 
 <a href="https://github.com/aMOPel/nosey.nim">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub</a>
 
 A minimal file watcher library,

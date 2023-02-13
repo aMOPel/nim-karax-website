@@ -1,7 +1,7 @@
 # tasketeer.nim
 
 <a href="https://github.com/aMOPel/tasketeer.nim">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub</a>
 
 Tasketeer is a prototype of a To-Do App made with [Nim](https://nim-lang.org/).

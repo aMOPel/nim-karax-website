@@ -1,7 +1,7 @@
 # fixedpoint.nim
 
 <a href="https://github.com/aMOPel/fixedpoint.nim">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub</a>
 
 This project was an exercise with the goal of creating 

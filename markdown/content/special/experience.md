@@ -1,7 +1,7 @@
 # Experience
 
 <a href="https://github.com/aMOPel">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub Profile</a>
 
 My experience gathered in programming related fields so far.

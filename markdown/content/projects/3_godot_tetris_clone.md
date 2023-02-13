@@ -1,7 +1,7 @@
 # godot-tetris-clone
 
 <a href="https://github.com/aMOPel/godot-tetris-clone">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub</a>
 
 A simple Tetris clone made with the [Godot Game Engine](https://godotengine.org/).

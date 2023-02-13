@@ -5,7 +5,7 @@ proc createDom*(): VNode =
     h1:
       text "This Website"
     a(href = "https://github.com/aMOPel/nim-karax-website/tree/amopels_content"):
-      img(src = "assets/icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      img(src = "assets/icons8-github.svg", class = "inline m-1 dark:invert", alt = "GitHub")
       text "GitHub"
     p:
       text """

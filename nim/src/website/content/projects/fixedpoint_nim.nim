@@ -5,7 +5,7 @@ proc createDom*(): VNode =
     h1:
       text "fixedpoint.nim"
     a(href = "https://github.com/aMOPel/fixedpoint.nim"):
-      img(src = "assets/icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      img(src = "assets/icons8-github.svg", class = "inline m-1 dark:invert", alt = "GitHub")
       text "GitHub"
     p:
       text "This project was an exercise with the goal of creating a "

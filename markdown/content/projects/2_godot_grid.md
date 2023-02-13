@@ -1,7 +1,7 @@
 # godot-grid
 
 <a href="https://github.com/aMOPel/godot-grid">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub</a>
 
 This is a utility library for the [Godot Game Engine](https://godotengine.org/)

@@ -5,7 +5,7 @@ proc createDom*(): VNode =
     h1:
       text "fomu-trng"
     a(href = "https://github.com/aMOPel/fomu-trng"):
-      img(src = "assets/icons8-github.svg", class = "inline m-1", alt = "GitHub")
+      img(src = "assets/icons8-github.svg", class = "inline m-1 dark:invert", alt = "GitHub")
       text "GitHub"
     p:
       text "This project is the result of my bachelor thesis."

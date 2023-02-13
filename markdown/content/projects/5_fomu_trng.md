@@ -1,7 +1,7 @@
 # fomu-trng
 
 <a href="https://github.com/aMOPel/fomu-trng">
-<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 ">
+<img src="assets/icons8-github.svg" alt="GitHub" class="inline m-1 dark:invert">
 GitHub</a>
 
 This project is the result of my bachelor thesis.
