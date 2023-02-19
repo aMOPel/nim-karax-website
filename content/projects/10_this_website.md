@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 13. 2023"
+[lastWriteTime]:- "Feb 16. 2023"
 
 # This Website
 
@@ -139,12 +139,12 @@ some code again.
 ```nim
 proc darkMode(): bool {.importjs: "window.matchMedia('(prefers-color-scheme: dark)').matches".}
 
-proc replaceHeadLink(href: string) =
-  # swaps out one stylesheet link for another
+proc replaceHeadLink(id, href: string) =
+  # replaces `href` of the <link>  with `id`
 
 proc postRender(routerDate: RouterData) =
-  if darkMode(): replaceHeadLink(hljsDarkTheme)
-  else: replaceHeadLink(hljsLightTheme)
+  if darkMode(): replaceHeadLink("hljs-theme", hljsDarkTheme)
+  else: replaceHeadLink("hljs-theme", hljsLightTheme)
 ```
 
 ### Responsive Design

@@ -2,8 +2,6 @@ import pkg/karax/[vdom, karaxdsl, karax, kbase]
 # import ../content/test/test
 import website/[globals, index, menu, dates]
 
-# TODO: find a solution for meta data in head html and karun not allowing for that
-
 var
   kxi: KaraxInstance
 
@@ -38,7 +36,7 @@ proc createDom(route: RouterData): VNode =
       dark:bg-dmwhite
       min-h-screen
     """)):
-    buildMenu({"Home": "home", "General Experience": "experience", "Project Index": "index"})
+    buildMenu({"Home": "home", "General Experience": "experience", "Open Source Projects": "index"})
     if not content.isNil:
       content
 
@@ -48,13 +46,13 @@ const
   hljsDarkTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/atelier-dune.min.css"
 proc highlight(elem: Element) {.importjs: "hljs.highlightElement(#)".}
 proc darkMode(): bool {.importjs: "window.matchMedia('(prefers-color-scheme: dark)').matches".}
-proc replaceHeadLink(href: string) =
+proc replaceHeadLink(id, href: string) =
   var 
     head = document.querySelector("head")
-    oldLink = document.getElementById("hljsTheme")
+    oldLink = document.getElementById(id)
     newLink = document.createElement("link")
   newLink.setAttr("rel", "stylesheet")
-  newLink.setAttr("id", "hljsTheme")
+  newLink.setAttr("id", id)
   newLink.setAttr("href", href)
   if oldLink.isNil:
     head.appendChild newLink
@@ -67,8 +65,8 @@ proc postRender(routerDate: RouterData) =
     if elem.getAttribute("hljs-rendered") != "true":
       highlight(elem)
       elem.setAttribute("hljs-rendered", "true")
-  if darkMode(): replaceHeadLink(hljsDarkTheme)
-  else: replaceHeadLink(hljsLightTheme)
+  if darkMode(): replaceHeadLink("hljs-theme", hljsDarkTheme)
+  else: replaceHeadLink("hljs-theme", hljsLightTheme)
 
 
 when isMainModule:
