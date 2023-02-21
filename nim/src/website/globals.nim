@@ -14,6 +14,7 @@ const
 var
   contents*: ContentsBySub
   sortedContents = contentCollection.contents
+  currentRoute*: string
 
 
 proc sortByIndex(cs: var seq[Content], order=Descending) =

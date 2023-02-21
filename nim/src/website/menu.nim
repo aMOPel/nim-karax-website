@@ -1,3 +1,4 @@
+import std/[sequtils]
 import pkg/karax/[vdom, karaxdsl, kdom, kbase]
 import globals
 import mobileMenu
@@ -26,10 +27,20 @@ proc buildMenu*(menu: openArray[MenuItem]): VNode =
             m-0 p-0 px-2
             inline-block
           """):
-            a(class="""
-              p-2
-              border-2 border-grey dark:border-dmgrey
-              hover:border-red dark:hover:border-dmred
-              hover:shadow-black hover:shadow-md
-            """, href=kstring("#/" & href)):
-              text t
+            if currentRoute == href or 
+              (href == "index" and currentRoute in contents["projects"].keys.toSeq) or
+              (href == "home" and currentRoute == ""):
+              a(class="""
+                p-2
+                border-2 border-red dark:border-dmred
+                hover:shadow-black hover:shadow-md
+              """, href=kstring("#/" & href)):
+                text t
+            else:
+              a(class="""
+                p-2
+                border-2 border-grey dark:border-dmgrey
+                hover:border-red dark:hover:border-dmred
+                hover:shadow-black hover:shadow-md
+              """, href=kstring("#/" & href)):
+                text t

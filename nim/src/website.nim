@@ -1,3 +1,4 @@
+import std/[strutils]
 import pkg/karax/[vdom, karaxdsl, karax, kbase]
 # import ../content/test/test
 import website/[globals, index, menu, dates]
@@ -6,19 +7,23 @@ var
   kxi: KaraxInstance
 
 proc createDom(route: RouterData): VNode =
-  var content: VNode
-  if route.hashPart == "#/index":
+  var
+    content: VNode
+  currentRoute = route.hashPart.`$`
+  currentRoute.removePrefix "#/"
+
+  if currentRoute == "index":
     content = buildIndex()
-  elif route.hashPart == "#/about_me":
+  elif currentRoute == "about_me":
     content = contents["special"]["about_me"].content()
-  elif route.hashPart == "#/experience":
+  elif currentRoute == "experience":
     content = contents["special"]["experience"].content()
     content.insert(contents["special"]["experience"].buildDates, 0)
-  elif route.hashPart.`$` in ["#/", "", "#/home"]:
+  elif currentRoute in ["", "home"]:
     content = contents["special"]["home"].content()
   else:
     for name, c in contents["projects"]:
-      if route.hashPart == kstring("#/" & name):
+      if currentRoute == name.kstring:
         content = c.content()
         content.insert(c.buildDates, 0)
         break
