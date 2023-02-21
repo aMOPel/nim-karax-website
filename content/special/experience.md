@@ -47,10 +47,10 @@ In the [Project Index](#/index) you can find a few projects I used GDScript in.
 ### Python 
 In one of my courses I needed to use Python and thus I worked through 
 most of the [official tutorial](https://docs.python.org/3/tutorial/index.html) back then. 
-I used it again in my [bachelor thesis](fomu_trng) for hardware programming. 
+I used it again in my [bachelor thesis](#/fomu_trng) for hardware programming. 
 I've grown to appreciate statically typed languages, so Python wouldn't be my
 first choice for some applications.
-However I still enjoy it because of its concise syntax and extreme flexibility in
+However I do enjoy it, for its concise syntax and extreme flexibility in
 use cases.
 
 ### SQL 

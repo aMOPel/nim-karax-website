@@ -9,6 +9,8 @@ proc createDom(route: RouterData): VNode =
   var content: VNode
   if route.hashPart == "#/index":
     content = buildIndex()
+  elif route.hashPart == "#/about_me":
+    content = contents["special"]["about_me"].content()
   elif route.hashPart == "#/experience":
     content = contents["special"]["experience"].content()
     content.insert(contents["special"]["experience"].buildDates, 0)
@@ -36,7 +38,12 @@ proc createDom(route: RouterData): VNode =
       dark:bg-dmwhite
       min-h-screen
     """)):
-    buildMenu({"Home": "home", "General Experience": "experience", "Open Source Projects": "index"})
+    buildMenu({
+      "Home": "home",
+      "About Me": "about_me",
+      "General Experience": "experience",
+      "Open Source Projects": "index",
+    })
     if not content.isNil:
       content
 
