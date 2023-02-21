@@ -14,6 +14,7 @@ proc buildMenu*(menu: openArray[MenuItem]): VNode =
       max-w-3xl w-full 
       mx-auto sticky top-0 p-3 
       drop-shadow-lg
+      z-50
     """)):
       ul(class="""
         bg-grey dark:bg-dmgrey
