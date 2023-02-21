@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # godot-exchange-scene
 
@@ -14,6 +14,6 @@ so I'm not going to get into that.
 
 This project was probably my first real experience of writing a slightly 
 bigger project and making it available to the public.
-This entailed that I had to document and test my code, which probably took more 
+This entailed that I had to **document** and **test** my code, which probably took more 
 time than writing the actual code, but significantly improved the code quality,
 since it revealed several bugs and issues.

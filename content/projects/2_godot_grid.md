@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # godot-grid
 
@@ -20,7 +20,7 @@ Then it grew a little bigger afterwards as I grew more interested in the topic.
 Overall it was a fun exercise, but taught me the limits of GDScript and its
 performance, as I tried to test out the limits of this library.
 
-### Preview
+## Preview
 
 Easily define Patterns
 ![Patterns](assets/grid_pattern.png) 

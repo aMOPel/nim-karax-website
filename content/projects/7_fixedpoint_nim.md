@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # fixedpoint.nim
 
@@ -12,11 +12,11 @@ a [fixed-point](https://en.wikipedia.org/wiki/Fixed-point_arithmetic) data type.
 
 It is implemented in [Nim](https://nim-lang.org/).
 
-This Nim library however doesn't work on a bit-level and
+This library doesn't work on a bit-level and
 is thus not based on the binary number system but on the decimal number system.
 This means it isn't as fast however it is quite easy to use (and to implement).
 
-The only real use case for this library would be if you work with numbers that 
+The use case for this library would be if you work with numbers that 
 only have a limited amount of decimal places, like money.
 
 In such cases the following problem can arise:

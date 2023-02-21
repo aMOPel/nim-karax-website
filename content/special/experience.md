@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 20. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # General Experience
 
@@ -12,34 +12,30 @@ GitHub Profile</a>
 *Order: most to least recently learned*
 
 ### Nim 
-About two years ago, I discovered a less known language called [Nim](https://nim-lang.org/), 
-which excited me and still keeps doing so.
+Two years ago I discovered a lesser known language called [Nim](https://nim-lang.org/),
+which still excites me.
 That is why most of my more recent projects use it in some capacity,
 including this website. 
-Like when I was learning C++, learning Nim in depth gave me some deeper insights 
-into software engineering concepts like meta programming and garbage collection. 
+Like C++, learning Nim has given me a deeper understanding of software engineering.
+It also introduced me to meta programming and garbage collection.
 
 ### JavaScript/TypeScript (and HTML+CSS) 
 I had no real contact with JavaScript throughout my studies, 
 but I got into it, when I helped with a Vue project. 
 It came easily to me because of my knowledge of previously learned languages. 
-Of course, I also had to refresh my knowledge of HTML and CSS, which I was already 
-somewhat familiar with. <!--TODO: too shy?-->
-<!--TODO: weird below?-->
-Although I am familiar with most concepts surrounding web development,
-I am still missing practical experience and detail knowledge 
-for many topics.
-However I am eager to dive deeper in almost all aspects of it,
-particularly backend development.
+That entailed refreshing my knowledge of HTML and CSS, which I was already 
+somewhat familiar with.
+Working in web development was fun and I am very interested in working in that domain more.
+I find back-end development particularly interesting.
 
 ### C++ 
-In my studies I took a computer graphics course, which required writing C++.
-It turned out to be not as hard as I thought. 
+In my studies I took a computer graphics course.
+Our projects were written in C++.
 A while later I worked through [learncpp.com](https://www.learncpp.com/), 
-which gave me a much better grasp of 
+which gave me a much better grasp of
 types, pointers, references, passing by value/reference, 
 compile time vs runtime, stack vs heap, and some other 
-software engineering concepts, that I hadn't really understood before.
+software engineering concepts.
 
 ### GDScript
 GDScript is the primary scripting language in 
@@ -51,48 +47,44 @@ In the [Project Index](#/index) you can find a few projects I used GDScript in.
 ### Python 
 In one of my courses I needed to use Python and thus I worked through 
 most of the [official tutorial](https://docs.python.org/3/tutorial/index.html) back then. 
-I haven't written a lot of Python since those days,
-however I used it among other things in my bachelor thesis. 
+I used it again in my [bachelor thesis](fomu_trng) for hardware programming. 
 I've grown to appreciate statically typed languages, so Python wouldn't be my
-first choice for many applications.
+first choice for some applications.
 However I still enjoy it because of its concise syntax and extreme flexibility in
 use cases.
 
 ### SQL 
-In my studies I took various database courses,
-some of which included practical usage of PostgreSQL. 
-I haven't used SQL a lot since then. 
-It only came to use in my [tasketeer.nim](#/tasketeer_nim) project,
+In my studies I took various database courses.
+One included practical usage of a PostgreSQL database by writing SQL Queries.
+I used SQL again in my [tasketeer.nim](#/tasketeer_nim) project,
 in which I used SQLite and an ORM library. 
-I found that I still felt quite comfortable using SQL. 
 
 ### Java 
-In the first semesters of my studies, Java was used in various exercises,
-which were centered around OOP. <!--TODO: too humble?-->
-I haven't used it since, so my Java knowledge is quite rusty. 
+I studied an practiced the fundamentals of Object Oriented Programming with 
+Java when I started my bachelors degree.
+
+---
 
 ## Tooling
 
 ### Git 
-I've been using Git for a long time now and as you can see on my GitHub 
-profile I am also familiar with the GitHub additions to the Git workflow, namely 
-working with Issues, PRs and Forks. I didn't use GitHub Actions yet, however 
-I regularly use custom build scripts for building and more.
+I am proficient with Git and very familiar with GitHub.
+I have plenty of practice with Issues,
+branches, forks, pull requests, merging and rebasing.
+I would enjoy more reasons to play with GitHub Actions.
 
 ### Docker 
-<!--TODO: too humble?-->
-During my studies I also used a few docker containers, so I at least have 
-a superficial understanding of its usage. 
+During my studies I used a few Docker containers,
+so I have basic understanding of using Docker.
 
-### Linux Terminal 
-Probably the most noteworthy family of tools I am familiar with is the 
-terminal landscape on Linux. 
-Due to my terminal focused workflow and a few years of experience, I am well 
-versed with the user level aspects. 
-You can read more about my experience with the 
-linux terminal landscape in my article about my [dotfiles](#/dotfiles).
+### Linux Shell 
+The Linux shell is one of my most noteworthy competencies.
+Due to my terminal focused workflow and 3 years of experience,
+I am more than comfortable in the Linux environment.
+You may read more about my experience with the (L)inux landscape in
+my article about my [dotfiles](#/dotfiles).
 
-### Editor & Co.
+### IDE and miscellaneous developer tooling
 Since I spent a lot of time learning and configuring Vim/NeoVim and other tools
 in the terminal, I have a good understanding of the development tool domain.
 

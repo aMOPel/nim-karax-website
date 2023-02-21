@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # fomu-trng
 
@@ -19,7 +19,7 @@ namely the [Fomu](https://tomu.im/fomu.html).
 
 The focus of the thesis was to **choose** and **integrate** various technologies to achieve the goal,
 as well as **evaluate** the resulting random data.
-Another aspect of the thesis was to make the code Open Source and document
+Another aspect of the thesis was to make the code open source and document
 the installation and usage properly.
 
 The code I had to write on a hardware level was
@@ -30,7 +30,7 @@ In the end I ended up with a structure looking like this:
 
 ![data_flow](assets/ba_data_flow.png)
 
-MuACM was the module I used to send data over USB and the NeoTRNG module was generating the
+MuACM was the module I used to send data over USB, and the NeoTRNG module was generating the
 random numbers.
 I glued their interfaces together with the FSM (finite state machine),
 which also handled the user input and thus the control flow.

@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 13. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # dotfiles
 
@@ -18,7 +18,7 @@ configuration files. This entails easy syncing between devices,
 easy bootstrapping of new devices and of course all the benefits of version
 control, like being able to rollback, when issues arise.
 
-These dotfiles are currently built to work well on a Ubuntu-based Linux distributions,
+My dotfiles are currently built to work well on a Ubuntu-based Linux distributions,
 but it could also be adapted to work on other Linux distros or Windows with WSL.
 
 If deployed on an eligible system it can be set up in quite little time 
@@ -33,7 +33,7 @@ Additionally there are some scripts included to install dependencies.
 Overall this comes pretty close to a perfect One-Command-Setup.
 
 In the future I might also explore Nix for that.
-Until now, I didn't need to migrate too often, however, so the need to perfect
+Until now, I didn't need to migrate too often, so the need to perfect
 the setup process, didn't arise yet.
 
 The mentionable tools that are configured are 
@@ -143,6 +143,9 @@ The final workflow looks somewhat like this:
 4. I type `tab`, followed by the mapping to insert the code,
 5. And finally `tab` again followed by the mapping that inserts the AST.
 
-Done. This means creating a test case takes seconds instead of a few minutes.
+Done. This means creating a test case takes seconds instead of minutes.
 
 <!--TODO: macros-->
+### Editor Macros for specific repetive tasks
+
+**TODO**

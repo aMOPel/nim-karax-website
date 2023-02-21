@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # nosey.nim
 
@@ -11,12 +11,12 @@ A minimal file watcher library,
 specialized on applying a state to a directory based on another directory.
 
 This project came to be, because I needed a file watcher for this website,
-to translate markdown files into an HTML DSL in [Nim](https://nim-lang.org/).
+to translate markdown files into an Karax DSL in [Nim](https://nim-lang.org/).
 
 It uses hashes of file contents to determine changes.
-This is far less efficient and less versatile,
+This is less efficient and less versatile,
 compared to an OS-event-based approach, like [libfswatch](https://github.com/paul-nameless/nim-fswatch),
-but this library is free of dependencies outside the Nim standard library.
+**but** this library is free of dependencies outside the Nim standard library.
 
 The abstraction is really simple.
 A state object is created for a source directory,

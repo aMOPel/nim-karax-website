@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # tree-sitter-nim
 
@@ -57,7 +57,7 @@ Thus a lot of test cases are necessary to prevent regression.
 This becomes more and more important the bigger the grammar grows, making
 the final pieces the hardest to fit into this net of interactions.
 
-**Fourth:** This growing complexity and seeming halt in progression
-**frustrated and demotivated** me.
-In the end I did **not spend enough time**
-to solve the last problems mentioned in the issues on the GitHub repo.
+**Fourth:** This growing complexity and seeming halt in 
+progression **frustrated and demotivated** me.
+In the end I did **not spend enough time** to 
+solve the last problems mentioned in the issues on the GitHub repo.

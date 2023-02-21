@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 16. 2023"
+[lastWriteTime]:- "Feb 21. 2023"
 
 # tasketeer.nim
 
@@ -34,7 +34,8 @@ Also the frontend was basically split into input (command line) and output (prin
 Another part of the architecture was, that it is possible to choose the backend 
 dynamic library in a configuration file.
 
-Also this turned out to be an exercise in **error handling**,
+Apart from architecture, this project turned out to be an exercise
+in **error handling**,
 as faults in the user input and backend had to be handled properly.
 
 I experimented with using a special `Result` type 
