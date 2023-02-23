@@ -12,6 +12,7 @@ template runOnceOrWatch =
       sourceDir,
       targetDir,
       fileConverter,
+      fileConverter,
       fileRemover,
       sourceStateJson,
     )
@@ -20,6 +21,7 @@ template runOnceOrWatch =
       sourceDir,
       targetDir,
       1000,
+      fileConverter,
       fileConverter,
       fileRemover,
       sourceStateJson,
@@ -57,8 +59,8 @@ proc runPutAssets(mode: Mode) {.thread.} =
     sourceDir = "../assets/"
     targetDir = "../build/assets/"
     sourceStateJson = ""
-    fileConverter = defaultFileConverter
-    fileRemover = defaultFileRemover
+    fileConverter = defaultChangedFileHandler
+    fileRemover = defaultDeletedFileHandler
   runOnceOrWatch()
 
 proc runTranspileMarkdown(mode: Mode) {.thread.} =

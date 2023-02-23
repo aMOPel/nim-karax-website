@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 21. 2023"
+[lastWriteTime]:- "Feb 23. 2023"
 
 # nosey.nim
 
@@ -40,8 +40,9 @@ proc updateDirState*(s: var DirState): NewChangedDeleted
 The newfound changes can be applied to a target directory.
 This library itself doesn't make any assumptions
 about how to mutate the target directory. Instead the user gets to pass in 
-callbacks `fileConverter` and `fileRemover`, which are called for every changed
-and deleted file. That means the user can mutate file contents, file names, or
+callbacks `newFileHandler`, `changedFileHandler` and `remFileHandler`,
+which are called for every new, changed and deleted file respectively.
+That means the user can mutate file contents, file names, or
 do something else entirely in the callbacks.
 
 ```nim
@@ -49,25 +50,46 @@ proc applyDirState*(
   sourceState: DirState,
   targetDir: string,
   diffSets = NewChangedDeleted(),
-  fileConverter: proc (sourceFilePath, targetDir: string)
-    = defaultFileConverter,
-  fileRemover: proc (sourceFilePath, targetDir: string)
-    = defaultFileRemover,
+  newFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultChangedFileHandler,
+  changedFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultChangedFileHandler,
+  deletedFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultDeletedFileHandler,
 )
 ```
 
 Finally that workflow is put into a while loop, to continuously update and apply
-the state. Additionally `sourceStateJson` provides a mechanism to persist the directory state
+the state.
+Additionally `sourceStateJson` provides a mechanism to persist the directory state
 across sessions.
 
 ```nim
 proc watch*(
   sourceDir, targetDir: string,
   interval = 5000,
-  fileConverter: proc (sourceFilePath, targetDir: string)
-  = defaultFileConverter,
-  fileRemover: proc (sourceFilePath, targetDir: string)
-  = defaultFileRemover,
+  newFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultChangedFileHandler,
+  changedFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultChangedFileHandler,
+  deletedFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultDeletedFileHandler,
   sourceStateJson = ""
 ) =
 ```
+
+Alternatively it can also do just one run.
+
+```nim
+proc runOnce*(
+  sourceDir, targetDir: string,
+  newFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultChangedFileHandler,
+  changedFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultChangedFileHandler,
+  deletedFileHandler: proc (sourceFilePath, targetDir: string)
+    = defaultDeletedFileHandler,
+  sourceStateJson = ""
+) =
+```
+
