@@ -1,30 +1,7 @@
 [creationTime]:- "Feb 20. 2023"
-[lastWriteTime]:- "Feb 21. 2023"
+[lastWriteTime]:- "Feb 23. 2023"
 
 # About Me
-
-## About My Studies
-
-It took me a while to warm up to my studies.
-In the beginning I had no direction and did the bare minimum.
-Only in the last quarter I really found intrinsic motivation and
-started to see improvement in my grades.
-
-Exploring the Linux open source landscape, and in particular Vim,
-was a major contributor to that motivation.
-It sparked my interest for many other fields of software development
-and led to me trying new technologies out of sheer curiosity.
-It gave me a passion for writing code.
-
-Since then, I've written multiple [Open Source Projects](#/index) in
-my spare time.
-
-## Interests
-
-- the [NeoVim Text Editor](https://neovim.io/),
-- the [Nim Programming Language](https://nim-lang.org/),
-- the [Godot Game Engine](https://godotengine.org/) and game development in general and 
-- the **Linux Open Source Landscape** in general.
 
 ## Character Traits and Soft Skills
 
@@ -49,3 +26,31 @@ which helps with solving problems of various kinds, be it technical or interpers
 - I enjoy analysing problems and planning solutions,
 but I also analyse my mistakes to improve in the future.
 - I work conscientiously and care about the quality of my work.
+
+---
+
+## Interests
+
+- the [NeoVim Text Editor](https://neovim.io/),
+- the [Nim Programming Language](https://nim-lang.org/),
+- the [Godot Game Engine](https://godotengine.org/) and game development in general and 
+- the **Linux Open Source Landscape** in general.
+
+---
+
+## About My Studies
+
+It took me a while to warm up to my studies.
+In the beginning I had no direction and did the bare minimum.
+Only in the last quarter I really found intrinsic motivation and
+started to see improvement in my grades.
+
+Exploring the Linux open source landscape, and in particular Vim,
+was a major contributor to that motivation.
+It sparked my interest for many other fields of software development
+and led to me trying new technologies out of sheer curiosity.
+It gave me a passion for writing code.
+
+Since then, I've written multiple [Open Source Projects](#/index) in
+my spare time.
+
