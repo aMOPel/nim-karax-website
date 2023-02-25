@@ -29,7 +29,10 @@ proc buildSortOptions*(): VNode =
       """,
       onchange=resortProjects):
         for k in sortOptions.keys:
-          option(value=k, selected= $(k == initialSortOption)):
+          option(
+            value=k.cstring,
+            selected=(k == initialSortOption).`$`.cstring
+          ):
             text k
 
 proc buildProjectList(): VNode =

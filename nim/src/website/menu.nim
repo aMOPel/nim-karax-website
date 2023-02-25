@@ -3,9 +3,7 @@ import pkg/karax/[vdom, karaxdsl, kdom, kbase]
 import globals
 import mobileMenu
 
-
-
-proc buildMenu*(menu: openArray[MenuItem]): VNode =
+proc buildMenu*(menu: openArray[string]): VNode =
   if clientWidth() < mobileMenuWidthThreshold:
     result = buildMobileMenu(menu)
   else:
@@ -22,20 +20,21 @@ proc buildMenu*(menu: openArray[MenuItem]): VNode =
         text-lg text-black dark:text-dmblack font-bold
         divide-black dark:divide-dmblack divide-x divide-solid
       """):
-        for (t, href) in menu:
+        for href in menu:
+          let menuItem = href.snakeCaseToTitleCase
           li(class="""
             m-0 p-0 px-2
             inline-block
           """):
             if currentRoute == href or 
-              (href == "index" and currentRoute in contents["projects"].keys.toSeq) or
-              (href == "home" and currentRoute == ""):
+              (href == "open_source_projects" and 
+               currentRoute in contents["projects"].keys.toSeq):
               a(class="""
                 p-2
                 border-2 border-red dark:border-dmred
                 hover:shadow-black hover:shadow-md
               """, href=kstring("#/" & href)):
-                text t
+                text menuItem
             else:
               a(class="""
                 p-2
@@ -43,4 +42,4 @@ proc buildMenu*(menu: openArray[MenuItem]): VNode =
                 hover:border-red dark:hover:border-dmred
                 hover:shadow-black hover:shadow-md
               """, href=kstring("#/" & href)):
-                text t
+                text menuItem

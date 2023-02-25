@@ -1,11 +1,10 @@
-import std/[algorithm, sugar, tables, times]
+import std/[algorithm, sugar, tables, times, strutils, sequtils]
 import contentCollection
 
 export contentCollection.Content
 export tables
 
 type
-  MenuItem* = tuple[text: string, href: string]
   ContentsBySub* = Table[string, OrderedTable[string, Content]]
 const
   dateFormat* = "MMM dd'.' yyyy"
@@ -15,6 +14,9 @@ var
   contents*: ContentsBySub
   sortedContents = contentCollection.contents
   currentRoute*: string
+
+proc snakeCaseToTitleCase*(s: string): string =
+  s.split("_").map(capitalizeAscii).join(" ")
 
 proc sortByIndex*(cs: var OrderedTable[string, Content], order=Descending) =
   cs.sort(

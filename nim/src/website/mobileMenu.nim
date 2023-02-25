@@ -8,7 +8,7 @@ var
   cancelImage = "assets/icons8-close.svg".kstring
   buttonImage = menuImage
 
-  menu: seq[MenuItem]
+  menu: seq[string]
 
 proc toggleMenu()
 
@@ -25,7 +25,8 @@ proc buildMobileMenuContent(): VNode =
           divide-black dark:divide-dmblack divide-y divide-solid
           text-center
         """):
-        for (t, href) in menu:
+        for href in menu:
+          let menuItem = href.snakeCaseToTitleCase
           li(class="""
             m-0 p-5
             w-screen
@@ -40,7 +41,7 @@ proc buildMobileMenuContent(): VNode =
                 p-3
               """):
                 p:
-                  text t
+                  text menuItem
 
 proc toggleMenu() =
   if buttonImage == cancelImage:
@@ -50,9 +51,7 @@ proc toggleMenu() =
     buttonImage = cancelImage
     menuContent = buildMobileMenuContent()
 
-proc buildMobileMenu*(
-  menu: openArray[MenuItem]
-  ): VNode =
+proc buildMobileMenu*(menu: openArray[string]): VNode =
   mobileMenu.menu = menu.toSeq
 
   result = buildHtml(tdiv(class="""

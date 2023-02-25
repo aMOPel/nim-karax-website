@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 20. 2023"
-[lastWriteTime]:- "Feb 23. 2023"
+[lastWriteTime]:- "Feb 25. 2023"
 
 # About Me
 
@@ -51,6 +51,6 @@ It sparked my interest for many other fields of software development
 and led to me trying new technologies out of sheer curiosity.
 It gave me a passion for writing code.
 
-Since then, I've written multiple [Open Source Projects](#/index) in
+Since then, I've written multiple [Open Source Projects](#/open_source_projects) in
 my spare time.
 

@@ -1,5 +1,5 @@
-import std/[strutils]
-import pkg/karax/[vdom, karaxdsl, karax, kbase]
+import std/[strutils, sequtils]
+import pkg/karax/[vdom, karaxdsl, karax, kdom]
 # import ../content/test/test
 import website/[globals, index, menu, dates]
 
@@ -7,26 +7,32 @@ var
   kxi: KaraxInstance
 
 proc createDom(route: RouterData): VNode =
+  # add project index to menu
+  contents["special"]["open_source_projects"] = Content(
+    index: 100,
+    subDir: "special",
+    name: "open_source_projects",
+    content: buildIndex,
+  )
+
   var
     content: VNode
   currentRoute = route.hashPart.`$`
   currentRoute.removePrefix "#/"
 
-  if currentRoute == "index":
-    content = buildIndex()
-  elif currentRoute == "about_me":
-    content = contents["special"]["about_me"].content()
-  elif currentRoute == "experience":
-    content = contents["special"]["experience"].content()
-    content.insert(contents["special"]["experience"].buildDates, 0)
-  elif currentRoute in ["", "home"]:
-    content = contents["special"]["home"].content()
-  else:
-    for name, c in contents["projects"]:
-      if currentRoute == name.kstring:
-        content = c.content()
-        content.insert(c.buildDates, 0)
-        break
+  # routing
+  var found = false
+  for contentSub in contents.keys:
+    if currentRoute in contents[contentSub].keys.toSeq:
+      let current = contents[contentSub][currentRoute]
+      content = current.content()
+      let dates = current.buildDates
+      if dates != nil: content.insert(dates, 0)
+      found = true
+      break
+  if not found:
+    window.location.href = "#/home"
+    window.location.reload
 
   content.id = "content"
   content.class &= """ 
@@ -43,16 +49,10 @@ proc createDom(route: RouterData): VNode =
       dark:bg-dmwhite
       min-h-screen
     """)):
-    buildMenu({
-      "Home": "home",
-      "About Me": "about_me",
-      "General Experience": "experience",
-      "Open Source Projects": "index",
-    })
+    buildMenu(contents["special"].keys.toSeq)
     if not content.isNil:
       content
 
-import karax/kdom
 const
   hljsLightTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/atelier-dune-light.min.css"
   hljsDarkTheme = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/atelier-dune.min.css"

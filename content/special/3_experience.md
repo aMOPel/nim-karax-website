@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 13. 2023"
-[lastWriteTime]:- "Feb 21. 2023"
+[lastWriteTime]:- "Feb 25. 2023"
 
 # General Experience
 
@@ -42,7 +42,7 @@ GDScript is the primary scripting language in
 the [Godot Game Engine](https://godotengine.org/).
 It is tailored to make development with Godot easy.
 Overall it is a simple language, with a syntax somewhat resembling Python's.
-In the [Project Index](#/index) you can find a few projects I used GDScript in.
+In the [Open Source Projects](#/open_source_projects) you can find a few projects I used GDScript in.
 
 ### Python 
 In one of my courses I needed to use Python and thus I worked through 
