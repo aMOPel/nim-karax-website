@@ -8,9 +8,9 @@ var
 
 proc createDom(route: RouterData): VNode =
   # add project index to menu
-  contents["special"]["open_source_projects"] = Content(
+  contents["menu"]["open_source_projects"] = Content(
     index: 100,
-    subDir: "special",
+    subDir: "menu",
     name: "open_source_projects",
     content: buildProjectIndex,
   )
@@ -49,7 +49,7 @@ proc createDom(route: RouterData): VNode =
       dark:bg-dmwhite
       min-h-screen
     """)):
-    buildMenu(contents["special"].keys.toSeq)
+    buildMenu(contents["menu"].keys.toSeq)
     if not content.isNil:
       content
 
