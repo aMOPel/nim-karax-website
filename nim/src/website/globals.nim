@@ -1,5 +1,4 @@
-import std/[algorithm, sugar, tables]
-# import std/[algorithm, sugar, times, tables]
+import std/[algorithm, sugar, tables, times]
 import contentCollection
 
 export contentCollection.Content
@@ -9,31 +8,45 @@ type
   MenuItem* = tuple[text: string, href: string]
   ContentsBySub* = Table[string, OrderedTable[string, Content]]
 const
-  dateFormat* = "dd-MM-yyyy HH:mm"
+  dateFormat* = "MMM dd'.' yyyy"
   mobileMenuWidthThreshold* = 640
+  initialSortOption* = "Chronological Order"
 var
   contents*: ContentsBySub
   sortedContents = contentCollection.contents
   currentRoute*: string
 
-
-proc sortByIndex(cs: var seq[Content], order=Descending) =
+proc sortByIndex*(cs: var OrderedTable[string, Content], order=Descending) =
   cs.sort(
-    (x,y:Content) => cmp(x.index, y.index),
+    (x,y:(string, Content)) => cmp(x[1].index, y[1].index),
     order=order)
 
-# proc sortByCreationTime(cs: var seq[Content], order=Descending) =
-#   cs.sort(
-#     (x,y:Content) => 
-#       cmp(x.creationTime.parse(dateFormat), y.creationTime.parse(dateFormat)),
-#     order=order)
+proc sortByLastWriteTime*(cs: var OrderedTable[string, Content], order=Descending) =
+  cs.sort(
+    (x,y:(string, Content)) => (
+      try:
+        cmp(x[1].lastWriteTime.parse(dateFormat), y[1].lastWriteTime.parse(dateFormat))
+      except TimeParseError:
+        -1
+      ),
+    order=order)
+
+let sortOptions* = {
+  "Last Updated": sortByLastWriteTime,
+  "Chronological Order": sortByIndex,
+}.toTable
+var selectedSortOption* = initialSortOption
 
 proc separateIntoSubDirs(cs: seq[Content]): ContentsBySub =
   for c in cs:
     if result.hasKey c.subDir:
       result[c.subDir][c.name] = c
     else:
-      result[c.subDir] = {c.name:  c}.toOrderedTable
+      result[c.subDir] = {c.name: c}.toOrderedTable
 
-sortedContents.sortByIndex
+proc sortSubContents*(subKey: string) =
+  sortOptions[selectedSortOption](contents[subKey])
+
 contents = sortedContents.separateIntoSubDirs
+for k in contents.keys:
+  k.sortSubContents

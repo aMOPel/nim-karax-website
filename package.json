@@ -12,6 +12,7 @@
   "author": "aMOPel",
   "license": "",
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "cssnano": "^5.1.14",
     "html-minifier": "^4.0.0",
