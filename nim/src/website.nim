@@ -1,7 +1,7 @@
 import std/[strutils, sequtils]
 import pkg/karax/[vdom, karaxdsl, karax, kdom]
 # import ../content/test/test
-import website/[globals, index, menu, dates]
+import website/[globals, projectIndex, menu, dates]
 
 var
   kxi: KaraxInstance
@@ -12,7 +12,7 @@ proc createDom(route: RouterData): VNode =
     index: 100,
     subDir: "special",
     name: "open_source_projects",
-    content: buildIndex,
+    content: buildProjectIndex,
   )
 
   var

@@ -63,7 +63,7 @@ proc buildProjectList(): VNode =
                   content[0]
                   content[2]
 
-proc buildIndex*(): VNode =
+proc buildProjectIndex*(): VNode =
   result = buildHtml():
     tdiv(class="""
       divide-black dark:divide-dmblack divide-y divide-solid
