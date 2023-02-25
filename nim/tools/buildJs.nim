@@ -1,16 +1,17 @@
 import std/[os, strformat, strutils, times]
 
 var 
-  inPath* {.threadvar.}:string
+  releaseFlag* = false
+  inPath* {.threadvar.}: string
   outPath* {.threadvar.}: string
   lastBuildTime* = getTime() - initDuration(seconds=2)
 
 proc updateBuild*(sourceFilePath, targetDir: string) {.thread.} =
-  if outPath != "" and 
-  not outPath.startsWith "--out:":
+  if outPath != "" and not outPath.startsWith "--out:":
     outPath = &"""--out:"{outPath}""""
   let
-    cmd = &"nim js {outPath} {inPath}"
+    releaseFlagStr = if releaseFlag: "-d:release" else: ""
+    cmd = &"nim js {releaseFlagStr} {outPath} {inPath}"
     now = getTime()
     durationSinceLastBuild = now - lastBuildTime
   if durationSinceLastBuild.inSeconds > 1:

@@ -2,12 +2,12 @@ import std/[os, threadpool, browsers]
 import pkg/[nosey]
 import buildJs, transpileMarkdown, buildHtml
 
-type Mode = enum mWatch, mOnce
+type Mode = enum mWatch, mOnce, mRelease
 
 template runOnceOrWatch =
   targetDir.createDir
   case mode:
-  of mOnce:
+  of mOnce, mRelease:
     runOnce(
       sourceDir,
       targetDir,
@@ -37,6 +37,7 @@ proc runBuildJs(mode: Mode) {.thread.} =
     sourceStateJson = ""
     fileConverter = updateBuild
     fileRemover = updateBuild
+  buildJs.releaseFlag = mode == mRelease
   buildJs.inPath = sourceDir/inFile
   buildJs.outPath = targetDir/outFile
   runOnceOrWatch()
@@ -84,12 +85,16 @@ when isMainModule:
     of cmdEnd: break
     of cmdShortOption, cmdLongOption:
       case p.key:
+      of "r":
+        mode = mRelease
+        echo "building for release"
       of "w":
         mode = mWatch
         echo "going into watch mode"
       of ["h", "help"]:
         echo """
         build [OPTIONS]
+        -r    build for realease
         -w    run watcher
         """
         quit()

@@ -21,7 +21,8 @@ set -e
 
 # build js, html and place assets
 cd $nim
-nim c --outDir:bin --verbosity:0 --listfullpaths $tools/build.nim && $bin/build
+nim c --outDir:bin --verbosity:0 --listfullpaths $tools/build.nim && \
+  $bin/build -r
 cd -
 
 # build css
