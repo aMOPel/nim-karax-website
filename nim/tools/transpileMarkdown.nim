@@ -44,7 +44,7 @@ proc mdToKarax*(sourceFilePath, targetDir: string) =
     creationTime = mdMetaTable.getOrDefault "creationTime"
     lastWriteTime = mdMetaTable.getOrDefault "lastWriteTime"
   createDir targetDir
-  discard execCmd(&"./nimbledeps/bin/markdown < {mdFileName} > {htmlFileName}")
+  discard execCmd(&"pandoc -o {htmlFileName} {mdFileName}")
   discard execCmd(&"./nimbledeps/bin/html2karax {htmlFileName} --out:{nimFileName}")
   var nimFile = readFile(nimFileName)
   nimFile = nimFile.replace("""
@@ -54,7 +54,7 @@ proc createDom(): VNode =
   result = buildHtml:
 """,
 """
-import pkg/karax/[vdom, karaxdsl]
+import pkg/karax/[vdom, karaxdsl, vstyles]
 
 proc createDom*(): VNode =
   result = buildHtml(article):

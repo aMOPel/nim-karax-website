@@ -39,4 +39,4 @@ when isMainModule:
       of cmdArgument:
         filePath = p.key
 
-  filePath.writeFile index
+  filePath.writeFile "<!DOCTYPE html> " & index

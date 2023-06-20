@@ -1,5 +1,5 @@
 [creationTime]:- "Feb 20. 2023"
-[lastWriteTime]:- "Feb 25. 2023"
+[lastWriteTime]:- "Jun 20. 2023"
 
 # About Me
 
@@ -31,10 +31,13 @@ but I also analyse my mistakes to improve in the future.
 
 ## Interests
 
-- the [NeoVim Text Editor](https://neovim.io/),
-- the [Nim Programming Language](https://nim-lang.org/),
-- the [Godot Game Engine](https://godotengine.org/) and game development in general and 
-- the **Linux Open Source Landscape** in general.
+  * Web Development
+  * Game Development
+    - The [Godot Game Engine](https://godotengine.org/)
+    - The [Nim Programming Language](https://nim-lang.org/)
+  * Workflow Optimization
+    - The [NeoVim Text Editor](https://neovim.io/)
+    - The **Linux Open Source Landscape** in general
 
 ---
 

@@ -15,8 +15,9 @@ to translate markdown files into an Karax DSL in [Nim](https://nim-lang.org/).
 
 It uses hashes of file contents to determine changes.
 This is less efficient and less versatile,
-compared to an OS-event-based approach, like [libfswatch](https://github.com/paul-nameless/nim-fswatch),
-**but** this library is free of dependencies outside the Nim standard library.
+compared to an OS-event-based approach, 
+like [libfswatch](https://github.com/paul-nameless/nim-fswatch), **but** this 
+library is free of dependencies outside the Nim standard library.
 
 The abstraction is really simple.
 A state object is created for a source directory,
