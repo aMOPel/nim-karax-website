@@ -1,5 +1,5 @@
-[creationTime]: - "Feb 13. 2023"
-[lastWriteTime]: - "Jun 20. 2023"
+[creationTime]:- "Feb 13. 2023"
+[lastWriteTime]:- "Jun 20. 2023"
 
 # General Experience
 
